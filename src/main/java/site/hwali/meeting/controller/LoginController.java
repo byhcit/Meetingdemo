@@ -5,13 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import site.hwali.meeting.model.Department;
 import site.hwali.meeting.model.Employee;
 import site.hwali.meeting.service.DepartmentService;
 import site.hwali.meeting.service.EmployeeService;
+import site.hwali.meeting.service.impl.DepartmentServiceImpl;
+import site.hwali.meeting.service.impl.EmployeeServiceImpl;
 
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class LoginController {
 
     @RequestMapping("/doReg")
     public String doReg(Employee employee, Model model) {
-        Integer result = employeeService.doReg(employee);
+        int result = employeeService.doReg(employee);
         if (result == 1) {
             return "redirect:/";
         } else {

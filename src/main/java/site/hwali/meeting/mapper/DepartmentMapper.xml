@@ -2,12 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="site.hwali.meeting.mapper.DepartmentMapper">
+    <insert id="addDept">
+        insert into department (departmentname) values (#{name})
+    </insert>
 
     <select id="getDepById" resultType="site.hwali.meeting.model.Department">
         select * from department where departmentid = #{id}
     </select>
     <select id="getAllDeps" resultType="site.hwali.meeting.model.Department">
         select * from department;
+    </select>
+    <select id="getDeptCountByName" resultType="java.lang.Integer">
+        select count(*) from department where departmentname = #{name}
     </select>
 
 

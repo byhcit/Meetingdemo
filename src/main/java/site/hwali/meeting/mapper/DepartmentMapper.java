@@ -8,4 +8,8 @@ public interface DepartmentMapper {
     Department getDepById(Integer id);
 
     List<Department> getAllDeps();
+
+    int getDeptCountByName(String name);
+
+    int addDept(String name);
 }

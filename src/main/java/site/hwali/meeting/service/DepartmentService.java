@@ -7,16 +7,13 @@ import site.hwali.meeting.model.Department;
 
 import java.util.List;
 
-@Service
-public class DepartmentService {
-    @Autowired
-    DepartmentMapper departmentMapper;
+public interface DepartmentService {
 
-    public Department getDepById(Integer id) {
-        return departmentMapper.getDepById(id);
-    }
+    public Department getDepById(Integer id);
 
-    public List<Department> getAllDeps() {
-        return departmentMapper.getAllDeps();
-    }
+    public List<Department> getAllDeps();
+
+    public int getDeptCountByName(String name);
+
+    public int addDept(String name);
 }

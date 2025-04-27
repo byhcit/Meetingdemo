@@ -12,11 +12,11 @@
                 <div class="content-nav">
                     人员管理 > 部门管理
                 </div>
-                <form>
+                <form action="/admin/addDept">
                     <fieldset>
                         <legend>添加部门</legend>
                         部门名称:
-                        <input type="text" id="departmentname" maxlength="20"/>
+                        <input type="text" name="name" id="departmentname" maxlength="20"/>
                         <input type="submit" class="clickbutton" value="添加"/>
                     </fieldset>
                 </form>
