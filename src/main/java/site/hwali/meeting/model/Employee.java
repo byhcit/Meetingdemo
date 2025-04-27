@@ -5,6 +5,7 @@ public class Employee {
     private String employeename;
     private String username;
     private String phone;
+    private String email;
     private Integer status;
     private Integer departmentid;
     private String password;
@@ -40,6 +41,14 @@ public class Employee {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Integer getStatus() {
@@ -81,6 +90,7 @@ public class Employee {
                 ", employeename='" + employeename + '\'' +
                 ", username='" + username + '\'' +
                 ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
                 ", status=" + status +
                 ", departmentid=" + departmentid +
                 ", password='" + password + '\'' +

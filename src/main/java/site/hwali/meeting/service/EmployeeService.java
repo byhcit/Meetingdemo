@@ -6,18 +6,28 @@ import org.springframework.util.ObjectUtils;
 import site.hwali.meeting.mapper.EmployeeMapper;
 import site.hwali.meeting.model.Employee;
 
+import java.util.Objects;
+
 @Service
 public class EmployeeService {
     @Autowired
     EmployeeMapper employeeMapper;
 
     public Employee doLogin(String username, String password) {
-        System.out.println("前===>"+username+password);
         Employee employee = employeeMapper.loadEmpByUsername(username);
-        System.out.println("后===>"+employee);
-        if (ObjectUtils.isEmpty(employee) || !employee.getPassword().equals(password)){
+        if (Objects.isNull(employee) || !employee.getPassword().equals(password)){
             return null;
         }
         return employee;
+    }
+
+    public Integer doReg(Employee employee) {
+        Employee emp = employeeMapper.loadEmpByUsername(employee.getUsername());
+        if (!Objects.isNull(emp)) {
+            return -1;
+        }
+        employee.setRole(1);
+        employee.setStatus(0);
+        return employeeMapper.doReg(employee);
     }
 }
