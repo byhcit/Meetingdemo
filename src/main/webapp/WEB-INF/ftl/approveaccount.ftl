@@ -9,9 +9,8 @@
 </head>
 <body>
 <#include 'top.ftl'>
-<#include 'leftMenu.ftl'>
-<#include 'footer.ftl'>
 <div class="page-body">
+    <#include 'leftMenu.ftl'>
     <div class="page-content">
         <div class="content-nav">
             人员管理 > 注册审批
@@ -88,5 +87,6 @@
         </table>
     </div>
 </div>
+<#include 'footer.ftl'>
 </body>
 </html>

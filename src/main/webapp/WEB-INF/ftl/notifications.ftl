@@ -6,9 +6,8 @@
     </head>
     <body>
     <#include 'top.ftl'>
-    <#include 'leftMenu.ftl'>
-    <#include 'footer.ftl'>
     <div class="page-body">
+        <#include 'leftMenu.ftl'>
             <div class="page-content">
                 <div class="content-nav">
                     个人中心 > <a href="notifications">最新通知</a>
@@ -98,5 +97,6 @@
                 
             </div>
         </div>
+    <#include 'footer.ftl'>
     </body>
 </html>

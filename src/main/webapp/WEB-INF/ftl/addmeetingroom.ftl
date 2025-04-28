@@ -6,9 +6,8 @@
     </head>
     <body>
     <#include 'top.ftl'>
-    <#include 'leftMenu.ftl'>
-    <#include 'footer.ftl'>
         <div class="page-body">
+            <#include 'leftMenu.ftl'>
             <div class="page-content">
                 <div class="content-nav">
                     会议预定 > 添加会议室
@@ -60,5 +59,6 @@
                 </form>
             </div>
         </div>
+    <#include 'footer.ftl'>
     </body>
 </html>
