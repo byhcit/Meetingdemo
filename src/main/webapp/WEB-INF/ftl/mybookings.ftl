@@ -10,6 +10,7 @@
     <body>
         <#include 'top.ftl'>
         <#include 'leftMenu.ftl'>
+        <#include 'footer.ftl'>
         <div class="page-body">
             <div class="page-content">
                 <div class="content-nav">
@@ -127,11 +128,6 @@
                     </tr>
                 </table>
             </div>
-        </div>
-        <div class="page-footer">
-            <hr/>
-            更多问题，欢迎联系<a href="mailto:hwa.li@outlook.com">管理员</a>
-            <img src="images/footer.png" alt="CoolMeeting"/>
         </div>
     </body>
 </html>
