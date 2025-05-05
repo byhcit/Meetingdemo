@@ -16,4 +16,8 @@ public interface DepartmentService {
     public int getDeptCountByName(String name);
 
     public int addDept(String name);
+
+    int deleteDep(int id);
+
+    int updateDep(int id, int name);
 }

@@ -3,6 +3,7 @@
     <head>
         <title>CoolMeeting会议管理系统</title>
         <link rel="stylesheet" href="/styles/common.css"/>
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
     </head>
     <body>
         <#include 'top.ftl'>
@@ -31,55 +32,59 @@
                         <#list deps as dep>
                         <tr>
                             <td>${dep.departmentid}</td>
-                            <td>${dep.departmentname}</td>
+                            <td id="depname${dep.departmentid}">${dep.departmentname}</td>
                             <td>
                                 <a class="clickbutton" href="#" id="edit${dep.departmentid}"
                                    onclick="editDep(${dep.departmentid})">编辑</a>
-                                <a class="clickbutton" style="display: none" href="#" id="edit${dep.departmentid}"
+                                <a class="clickbutton" style="display: none" href="#" id="cancel${dep.departmentid}"
                                    onclick="cancelDep(${dep.departmentid})">取消</a>
-                                <a class="clickbutton" href="/admin/deletedep?departmentid=${dep.departmentid}">删除</a>
+                                <a class="clickbutton" href="/admin/deleteDep?id=${dep.departmentid}">删除</a>
                             </td>
                         </tr>
                         </#list>
                     </#if>
-<#--                    <tr>-->
-<#--                        <td>1</td>-->
-<#--                        <td>技术部</td>-->
-<#--                        <td>-->
-<#--                            <a class="clickbutton" href="#">编辑</a>-->
-<#--                            <a class="clickbutton" href="#">删除</a>-->
-<#--                        </td>-->
-<#--                    </tr>-->
-<#--                    <tr>-->
-<#--                        <td>2</td>-->
-<#--                        <td>-->
-<#--                            <input type="text" value="销售部"/>-->
-<#--                        </td>-->
-<#--                        <td>-->
-<#--                            <a class="clickbutton" href="#">编辑</a>-->
-<#--                            <a class="clickbutton" href="#">取消</a>-->
-<#--                            <a class="clickbutton" href="#">删除</a>-->
-<#--                        </td>-->
-<#--                    </tr>-->
-<#--                    <tr>-->
-<#--                        <td>3</td>-->
-<#--                        <td>市场部</td>-->
-<#--                        <td>-->
-<#--                            <a class="clickbutton" href="#">编辑</a>-->
-<#--                            <a class="clickbutton" href="#">删除</a>-->
-<#--                        </td>-->
-<#--                    </tr>-->
-<#--                    <tr>-->
-<#--                        <td>4</td>-->
-<#--                        <td>行政部</td>-->
-<#--                        <td>-->
-<#--                            <a class="clickbutton" href="#">编辑</a>-->
-<#--                            <a class="clickbutton" href="#">删除</a>-->
-<#--                        </td>-->
-<#--                    </tr>-->
                 </table>
             </div>
         </div>
         <#include 'footer.ftl'>
+    <script>
+        var depName;
+        function editDep(depid){
+            var editBtn = $('#edit' + depid);
+            var cancelBtn = $('#cancel' + depid);
+            var ele = $('#depname' + depid);
+            console.log('ele===>', ele, typeof ele);
+            depName = ele.html();
+            console.log("depName===>",depName);
+            if (cancelBtn.css('display') === 'none') {
+                cancelBtn.css('display', 'inline');
+                editBtn.html('确定');
+                console.log('ele.text()===>', ele.text());
+                depName = ele.text();
+                ele.html('<input type="text" value="' + depName + '" />');
+            } else {
+                var children = ele.children('input');
+                window.children = children;
+                console.log("children===>", children);
+                var val = children.val();
+                $.post('/admin/updateDep',{id:depid,name:val},(msg) => {
+                    if ('success' === msg){
+                        cancelBtn.css('display', 'none');
+                        editBtn.html('编辑');
+                        ele.html(val)
+                    }
+                })
+            }
+        }
+
+        function cancelDep(depid) {
+            var editBtn = $('#edit' + depid);
+            var cancelBtn = $('#cancel' + depid);
+            var ele = $('#depname' + depid);
+            cancelBtn.css('display', 'none');
+            editBtn.html('编辑');
+            ele.html(depName);
+        }
+    </script>
     </body>
 </html>

@@ -12,4 +12,9 @@ public interface DepartmentMapper {
     int getDeptCountByName(String name);
 
     int addDept(String name);
+
+    int deleteDep(int id);
+
+    int updateDep(int id, int name);
+
 }

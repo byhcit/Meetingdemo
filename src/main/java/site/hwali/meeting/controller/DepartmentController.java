@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import site.hwali.meeting.model.Department;
 import site.hwali.meeting.service.DepartmentService;
 import site.hwali.meeting.service.impl.DepartmentServiceImpl;
@@ -38,12 +39,23 @@ public class DepartmentController {
 
         int res = departmentService.addDept(name);
         if (res == 0) {
-            model.addAttribute("error","部门新增失败");
+            model.addAttribute("error", "部门新增失败");
             return "forward:/admin/departments";
         }
 
         return "redirect:/admin/departments";
-
     }
 
+    @RequestMapping("deleteDep")
+    public String deleteDep(int id) {
+        departmentService.deleteDep(id);
+        return "redirect:/admin/departments";
+    }
+
+    @RequestMapping("updateDep")
+    @ResponseBody
+    public String updateDep(int id, int name) {
+        int result = departmentService.updateDep(id, name);
+        return result == 1 ? "success" : "error";
+    }
 }

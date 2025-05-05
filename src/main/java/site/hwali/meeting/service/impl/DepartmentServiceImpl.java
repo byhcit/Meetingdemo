@@ -32,4 +32,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     public int addDept(String name) {
         return departmentMapper.addDept(name);
     }
+
+    @Override
+    public int deleteDep(int id) {
+        return departmentMapper.deleteDep(id);
+    }
+
+    @Override
+    public int updateDep(int id, int name) {
+        return departmentMapper.updateDep(id, name);
+    }
 }
