@@ -11,8 +11,6 @@ import site.hwali.meeting.model.Department;
 import site.hwali.meeting.model.Employee;
 import site.hwali.meeting.service.DepartmentService;
 import site.hwali.meeting.service.EmployeeService;
-import site.hwali.meeting.service.impl.DepartmentServiceImpl;
-import site.hwali.meeting.service.impl.EmployeeServiceImpl;
 
 import java.util.List;
 

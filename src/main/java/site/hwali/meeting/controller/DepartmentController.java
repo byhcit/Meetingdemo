@@ -5,9 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import site.hwali.meeting.model.Department;
 import site.hwali.meeting.service.DepartmentService;
-import site.hwali.meeting.service.impl.DepartmentServiceImpl;
 
 import java.util.Objects;
 
