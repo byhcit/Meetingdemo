@@ -1,6 +1,7 @@
 package site.hwali.meeting.service;
 
 import site.hwali.meeting.model.Employee;
+import java.util.List;
 
 public interface EmployeeService {
 
@@ -8,5 +9,11 @@ public interface EmployeeService {
 
     public int doReg(Employee employee);
 
-    String getAllEmpsByStatus(int pendingApprove);
+    List<Employee> getAllEmpsByStatus(int status);
+
+    int updateStatus(Integer id, Integer status);
+
+    List<Employee> getEmpsByStatus(int status, int pageNum, int pageSize);
+    
+    int getTotalByStatus(int status);
 }

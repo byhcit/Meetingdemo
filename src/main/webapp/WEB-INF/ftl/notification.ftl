@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="styles/common.css"/>
+        <link rel="stylesheet" href="/styles/common.css"/>
     </head>
     <body>
     <#include 'top.ftl'>
