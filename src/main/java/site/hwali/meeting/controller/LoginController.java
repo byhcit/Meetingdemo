@@ -42,12 +42,12 @@ public class LoginController {
                 return "forward:/";
             } else {
                 httpSession.setAttribute("currentuser", employee);
-                return "redirect:/notifications";
+                return "/notification";
             }
         }
     }
 
-    @RequestMapping("register")
+    @RequestMapping("/register")
     public String register(Model model) {
         List<Department> deps = departmentService.getAllDeps();
         model.addAttribute("deps", deps);

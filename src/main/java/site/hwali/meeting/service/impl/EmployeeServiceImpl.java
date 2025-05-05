@@ -32,4 +32,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setStatus(0);
         return employeeMapper.doReg(employee);
     }
+
+    @Override
+    public String getAllEmpsByStatus(int pendingApprove) {
+        return null;
+    }
 }

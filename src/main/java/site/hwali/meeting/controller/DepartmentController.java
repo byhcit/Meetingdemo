@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import site.hwali.meeting.service.DepartmentService;
 
 import java.util.Objects;
-
+//部门管理
 @Controller
 @RequestMapping("/admin")
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
 
-    @RequestMapping("/departments")
+    @RequestMapping("/deps")
     public String departments(Model model) {
         model.addAttribute("deps", departmentService.getAllDeps());
-        return "departments";
+        return "/department";
     }
 
     @RequestMapping("/addDept")
@@ -26,28 +26,28 @@ public class DepartmentController {
         System.out.println("name = " + name);
         if (Objects.isNull(name) || name.isBlank()) {
             model.addAttribute("error", "部门名称不可为空");
-            return "forward:/admin/departments";
+            return "forward:/admin/deps";
         }
 
         int count = departmentService.getDeptCountByName(name);
         if (count > 0) {
             model.addAttribute("error", "部门名称已存在");
-            return "forward:/admin/departments";
+            return "forward:/admin/deps";
         }
 
         int res = departmentService.addDept(name);
         if (res == 0) {
             model.addAttribute("error", "部门新增失败");
-            return "forward:/admin/departments";
+            return "forward:/admin/deps";
         }
 
-        return "redirect:/admin/departments";
+        return "redirect:/admin/deps";
     }
 
     @RequestMapping("deleteDep")
     public String deleteDep(int id) {
         departmentService.deleteDep(id);
-        return "redirect:/admin/departments";
+        return "redirect:/admin/deps";
     }
 
     @RequestMapping("updateDep")

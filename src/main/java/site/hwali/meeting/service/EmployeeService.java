@@ -7,4 +7,6 @@ public interface EmployeeService {
     public Employee doLogin(String username, String password);
 
     public int doReg(Employee employee);
+
+    String getAllEmpsByStatus(int pendingApprove);
 }

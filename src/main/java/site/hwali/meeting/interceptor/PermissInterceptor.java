@@ -21,7 +21,7 @@ public class PermissInterceptor implements HandlerInterceptor {
         String requestURI = request.getRequestURI();
         System.out.println("requestURI = " + requestURI);
         // 匿名可访问路径
-        String[] commonPaths = {"/","/doLogin","/register","doReg"};
+        String[] commonPaths = {"/","/doLogin","/register","/doReg"};
         if (Arrays.stream(commonPaths).filter(path->path.equals(requestURI)).count()>0){
                 return true;
         }

@@ -12,7 +12,7 @@
         <ul class="sidebar-menu">
             <li class="sidebar-menuitem"><a href="/register">员工注册</a></li>
             <#if currentuser?? && currentuser.role==2>
-            <li class="sidebar-menuitem"><a href="/admin/departments">部门管理</a></li>
+            <li class="sidebar-menuitem"><a href="/admin/deps">部门管理</a></li>
             <li class="sidebar-menuitem"><a href="/admin/approveaccount">注册审批</a></li>
             <li class="sidebar-menuitem"><a href="/admin/searchemployees">搜索员工</a></li>
             </#if>
