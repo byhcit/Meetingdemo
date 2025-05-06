@@ -12,4 +12,8 @@ public interface MeetingRoomMapper {
     MeetingRoom getMrById(int id);
 
     int updateRoom(MeetingRoom meetingRoom);
+
+    int addMr(MeetingRoom meetingRoom);
+
+    MeetingRoom getMrByRoomNum(int roomnum);
 }

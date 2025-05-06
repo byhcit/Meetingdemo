@@ -7,6 +7,7 @@ import site.hwali.meeting.model.MeetingRoom;
 import site.hwali.meeting.service.MeetingRoomService;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class MeetingRoomServiceImpl implements MeetingRoomService {
@@ -42,4 +43,14 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
     public int updateRoom(MeetingRoom meetingRoom) {
         return meetingRoomMapper.updateRoom(meetingRoom);
     }
+
+    @Override
+    public int addMr(MeetingRoom meetingRoom) {
+        MeetingRoom mr = meetingRoomMapper.getMrByRoomNum(meetingRoom.getRoomnum());
+        if (!Objects.isNull(mr)){
+            return -1;
+        }
+        return meetingRoomMapper.addMr(meetingRoom);
+    }
+
 }

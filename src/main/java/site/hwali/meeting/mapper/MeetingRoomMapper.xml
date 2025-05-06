@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="site.hwali.meeting.mapper.MeetingRoomMapper">
+    <insert id="addMr">
+        insert into meetingroom (roomnum, roomname, capacity, status, description)
+        values (#{roomnum}, #{roomname}, #{capacity}, #{status}, #{description});
+    </insert>
+
     <update id="updateRoom" parameterType="site.hwali.meeting.model.MeetingRoom">
         update meetingroom
         <set>
@@ -15,18 +20,25 @@
     </update>
 
     <select id="getAllMr" resultType="site.hwali.meeting.model.MeetingRoom">
-        select * from meetingroom
+        select *
+        from meetingroom
     </select>
 
     <select id="selectByPage" resultType="site.hwali.meeting.model.MeetingRoom">
-        select * from meetingroom limit #{offset}, #{pageSize}
+        select *
+        from meetingroom limit #{offset}, #{pageSize}
     </select>
 
     <select id="selectCount" resultType="int">
-        select count(*) from meetingroom
+        select count(*)
+        from meetingroom
     </select>
 
     <select id="getMrById" resultType="site.hwali.meeting.model.MeetingRoom">
-        select * from meetingroom where roomid = #{id}
+        select * from meetingroom where roomid=#{roomid}
+    </select>
+
+    <select id="getMrByRoomNum" resultType="site.hwali.meeting.model.MeetingRoom">
+        select * from meetingroom where roomnum=#{roomnum}
     </select>
 </mapper>

@@ -42,7 +42,7 @@ public class LoginController {
                 return "forward:/";
             } else {
                 httpSession.setAttribute("currentuser", employee);
-                return "/notification";
+                return "redirect:/notifications";
             }
         }
     }

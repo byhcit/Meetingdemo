@@ -28,7 +28,7 @@
                                 <td>${mr.roomnum}</td>
                                 <td>${mr.roomname}</td>
                                 <td>${mr.capacity}</td>
-                                <td>${(mr.status==0)?string('启用','已占用')}</td>
+                                <td>${(mr.status==1)?string('启用',(mr.status==0)?string('停用''已占用'))}</td>
                                 <td>
                                     <a class="clickbutton" href="/roomDetail?id=${mr.roomid}">查看详情</a>
                                 </td>

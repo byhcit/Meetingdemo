@@ -43,9 +43,29 @@ public class MeetingRoomController {
         return "roomDetail";
     }
 
-    @RequestMapping("updateRoom")
+    @RequestMapping("/updateRoom")
     public String updateRoom(MeetingRoom meetingRoom) {
         int result = meetingRoomService.updateRoom(meetingRoom);
         return result == 1 ? "redirect:/meetingRoom" : "forward:/roomDetail";
+    }
+
+    @RequestMapping("/admin/addMeetingRoom")
+    public String addMeetingRoom() {
+        return "addMeetingRoom";
+    }
+
+    @RequestMapping("/admin/doAddMr")
+    public String doAddMr(MeetingRoom meetingRoom, Model model) {
+        int result = meetingRoomService.addMr(meetingRoom);
+        if (result == -1) {
+            model.addAttribute("error", "该房号已存在，请重新输入！");
+            return "forward:/admin/addMeetingRoom";
+        }
+        if (result == 1) {
+            return "redirect:/meetingRoom";
+        } else {
+            model.addAttribute("error", "添加失败，请重试！");
+            return "redirect:/admin/addMeetingRoom";
+        }
     }
 }
