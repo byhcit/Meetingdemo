@@ -19,11 +19,6 @@
         where roomid = #{roomid}
     </update>
 
-    <select id="getAllMr" resultType="site.hwali.meeting.model.MeetingRoom">
-        select *
-        from meetingroom
-    </select>
-
     <select id="selectByPage" resultType="site.hwali.meeting.model.MeetingRoom">
         select *
         from meetingroom limit #{offset}, #{pageSize}

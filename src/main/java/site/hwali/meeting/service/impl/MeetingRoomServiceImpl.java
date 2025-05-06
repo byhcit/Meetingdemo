@@ -15,12 +15,7 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
     MeetingRoomMapper meetingRoomMapper;
 
     @Override
-    public List<MeetingRoom> getAllMr() {
-        return meetingRoomMapper.getAllMr();
-    }
-
-    @Override
-    public List<MeetingRoom> getMeetingRoomsByPage(int pageNum, int pageSize) {
+    public List<MeetingRoom> getMrsByPage(int pageNum, int pageSize) {
         int offset = (pageNum - 1) * pageSize;
         return meetingRoomMapper.selectByPage(offset, pageSize);
     }

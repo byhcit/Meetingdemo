@@ -24,7 +24,7 @@ public class MeetingRoomController {
         int totalPages = (total + pageSize - 1) / pageSize;
 
         // 获取分页数据
-        model.addAttribute("mrs", meetingRoomService.getMeetingRoomsByPage(pageNum, pageSize));
+        model.addAttribute("mrs", meetingRoomService.getMrsByPage(pageNum, pageSize));
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("total", total);
@@ -35,11 +35,7 @@ public class MeetingRoomController {
 
     @RequestMapping("/roomDetail")
     public String roomDetail(int id, Model model) {
-        MeetingRoom mr = meetingRoomService.getMrById(id);
-        if (mr == null) {
-            return "redirect:/meetingRoom";
-        }
-        model.addAttribute("mr", mr);
+        model.addAttribute("mr", meetingRoomService.getMrById(id));
         return "roomDetail";
     }
 

@@ -5,7 +5,6 @@ import site.hwali.meeting.model.MeetingRoom;
 import java.util.List;
 
 public interface MeetingRoomMapper {
-    List<MeetingRoom> getAllMr();
     List<MeetingRoom> selectByPage(int offset, int pageSize);
     int selectCount();
 
