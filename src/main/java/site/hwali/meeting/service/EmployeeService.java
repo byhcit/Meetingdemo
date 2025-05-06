@@ -10,11 +10,12 @@ public interface EmployeeService {
 
     public int doReg(Employee employee);
 
-    int updateStatus(int id, int status);
+    int updateStatus(int id, String status);
 
     List<Employee> getEmpsByStatus(String status, int pageNum, int pageSize);
     
     int getTotalByStatus(String status);
 
     List<Employee> getEmpsByPage(Employee empCond, int page, int size);
+
 }

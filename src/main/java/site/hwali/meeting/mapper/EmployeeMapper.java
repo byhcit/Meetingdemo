@@ -10,7 +10,7 @@ public interface EmployeeMapper {
 
     int doReg(Employee employee);
 
-    int updateStatus(@Param("employeeid") int id, @Param("status") int status);
+    int updateStatus(@Param("employeeid") int id, @Param("status") String status);
 
     List<Employee> getEmpsByStatus(@Param("status") String status,
                                   @Param("offset") int offset, 
@@ -19,4 +19,6 @@ public interface EmployeeMapper {
     int getTotalByStatus(@Param("status") String status);
 
     List<Employee> getEmpsByPage(@Param("empCond") Employee empCond, @Param("offset")int offset, int limit);
+
+    void updateStatus(@Param("employeeid") int employeeid);
 }

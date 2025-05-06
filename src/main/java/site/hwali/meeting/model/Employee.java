@@ -91,7 +91,7 @@ public class Employee {
                 ", username='" + username + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", status=" + status +
+                ", status='" + status + '\'' +
                 ", departmentid=" + departmentid +
                 ", password='" + password + '\'' +
                 ", role=" + role +

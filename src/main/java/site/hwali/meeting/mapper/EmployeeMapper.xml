@@ -23,7 +23,7 @@
 
     <update id="updateStatus">
         update employee
-        set status=#{status}
+        set status= #{status}
         where employeeid = #{employeeid}
     </update>
 

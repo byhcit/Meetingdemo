@@ -89,7 +89,12 @@
                                 <td>${emp.username}</td>
                                 <td>${emp.phone}</td>
                                 <td>${emp.email}</td>
-                                <td><a class="clickbutton" href="#">关闭账号</a></td>
+                                <#if emp.status == '1'>
+                                    <td><a class="clickbutton" href="/admin/disableEmp?id=${emp.employeeid}">关闭账号</a></td>
+                                </#if>
+                                <#if emp.status == '2'>
+                                    <td><a class="clickbutton" href="/admin/unlockEmp?id=${emp.employeeid}">解开账号</a></td>
+                                </#if>
                             </tr>
                         </#list>
                     </#if>

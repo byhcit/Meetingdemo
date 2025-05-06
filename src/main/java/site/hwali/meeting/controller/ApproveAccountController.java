@@ -39,7 +39,7 @@ public class ApproveAccountController {
     }
 
     @RequestMapping("/updateStatus")
-    public String updateStatus(@RequestParam("employeeid") int id, @RequestParam("status") int status) {
+    public String updateStatus(@RequestParam("employeeid") int id, @RequestParam("status") String status) {
         int result = employeeService.updateStatus(id, status);
         return "redirect:/admin/approveAccount";
     }

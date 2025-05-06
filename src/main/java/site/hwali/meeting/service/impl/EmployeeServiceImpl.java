@@ -35,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public int updateStatus(int id, int status) {
+    public int updateStatus(int id, String status) {
         return employeeMapper.updateStatus(id, status);
     }
 

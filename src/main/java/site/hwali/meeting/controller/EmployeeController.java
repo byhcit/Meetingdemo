@@ -37,4 +37,16 @@ public class EmployeeController {
 
         return "searchEmployee";
     }
+
+    @RequestMapping("/disableEmp")
+    public String disableEmp(int id) {
+        employeeService.updateStatus(id,"2");
+        return "redirect:/admin/searchEmps";
+    }
+@RequestMapping("/unlockEmp")
+    public String unlockEmp(int id) {
+        employeeService.updateStatus(id,"0");
+        return "redirect:/admin/searchEmps";
+    }
+
 }
