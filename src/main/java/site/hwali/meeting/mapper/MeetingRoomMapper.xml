@@ -24,9 +24,8 @@
         from meetingroom limit #{offset}, #{pageSize}
     </select>
 
-    <select id="selectCount" resultType="int">
-        select count(*)
-        from meetingroom
+    <select id="selectCount" resultType="integer">
+        select count(*) from meetingroom
     </select>
 
     <select id="getMrById" resultType="site.hwali.meeting.model.MeetingRoom">

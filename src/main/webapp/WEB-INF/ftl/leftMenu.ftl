@@ -14,7 +14,7 @@
             <#if currentuser?? && currentuser.role==2>
             <li class="sidebar-menuitem"><a href="/admin/deps">部门管理</a></li>
             <li class="sidebar-menuitem"><a href="/admin/approveAccount">注册审批</a></li>
-            <li class="sidebar-menuitem"><a href="/admin/searchEmployee">搜索员工</a></li>
+            <li class="sidebar-menuitem"><a href="/admin/searchEmps">搜索员工</a></li>
             </#if>
         </ul>
     </div>

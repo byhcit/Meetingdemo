@@ -30,17 +30,12 @@ public class EmployeeServiceImpl implements EmployeeService {
             return -1;
         }
         employee.setRole(1);
-        employee.setStatus(0);
+        employee.setStatus("0");
         return employeeMapper.doReg(employee);
     }
 
     @Override
-    public List<Employee> getAllEmpsByStatus(int status) {
-        return employeeMapper.getAllEmpsByStatus(status);
-    }
-
-    @Override
-    public int updateStatus(Integer id, Integer status) {
+    public int updateStatus(int id, int status) {
         return employeeMapper.updateStatus(id, status);
     }
 
@@ -52,5 +47,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public int getTotalByStatus(int status) {
         return employeeMapper.getTotalByStatus(status);
+    }
+
+    @Override
+    public List<Employee> getEmpsByPage(Employee empCond, int page, int size) {
+        return employeeMapper.getEmpsByPage(empCond, (page - 1) * size, size);
     }
 }

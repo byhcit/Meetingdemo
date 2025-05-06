@@ -34,10 +34,10 @@ public class LoginController {
             model.addAttribute("error", "用户名或密码输入错误,登录失败");
             return "forward:/";
         } else {
-            if (employee.getStatus() == 0) {
+            if ("0".equals(employee.getStatus())) {
                 model.addAttribute("error", "用户待审批");
                 return "forward:/";
-            } else if (employee.getStatus() == 2) {
+            } else if ("2".equals(employee.getStatus())) {
                 model.addAttribute("error", "用户审批未通过");
                 return "forward:/";
             } else {

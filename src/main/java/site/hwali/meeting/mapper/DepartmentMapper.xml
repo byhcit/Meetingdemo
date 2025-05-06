@@ -28,7 +28,7 @@
         select *
         from department;
     </select>
-    <select id="getDeptCountByName" resultType="java.lang.Integer">
+    <select id="getDeptCountByName" resultType="integer">
         select count(*)
         from department
         where departmentname = #{name}

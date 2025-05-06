@@ -15,4 +15,6 @@ public interface MeetingRoomMapper {
     int addMr(MeetingRoom meetingRoom);
 
     MeetingRoom getMrByRoomNum(int roomnum);
+
+    List<MeetingRoom> getAllMr();
 }

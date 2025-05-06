@@ -1,14 +1,14 @@
 package site.hwali.meeting.model;
 
 public class Department {
-    private Integer departmentid;
+    private int departmentid;
     private String departmentname;
 
-    public Integer getDepartmentid() {
+    public int getDepartmentid() {
         return departmentid;
     }
 
-    public void setDepartmentid(Integer departmentid) {
+    public void setDepartmentid(int departmentid) {
         this.departmentid = departmentid;
     }
 

@@ -5,7 +5,7 @@ import site.hwali.meeting.model.Department;
 import java.util.List;
 
 public interface DepartmentMapper {
-    Department getDepById(Integer id);
+    Department getDepById(int id);
 
     List<Department> getAllDeps();
 

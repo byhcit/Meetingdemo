@@ -33,22 +33,31 @@
         where username = #{username}
     </select>
 
-    <select id="getAllEmpsByStatus" resultType="site.hwali.meeting.model.Employee">
-        select *
-        from employee
-        where status = #{status}
-    </select>
-
     <select id="getEmpsByStatus" resultType="site.hwali.meeting.model.Employee">
         select *
         from employee
-        where status = #{status}
-        limit #{offset}, #{limit}
+        where status = #{status} limit #{offset}
+            , #{limit}
     </select>
 
-    <select id="getTotalByStatus" resultType="java.lang.Integer">
+    <select id="getTotalByStatus" resultType="integer">
         select count(*)
         from employee
         where status = #{status}
+    </select>
+    <select id="getEmpsByPage" resultType="site.hwali.meeting.model.Employee">
+        select * from employee
+        <where>
+            <if test="empCond.status !=null">
+                status = #{empCond.status}
+            </if>
+            <if test="empCond.employeename != null">
+                and employeename like concat('%',#{empCond.employeename},'%')
+            </if>
+            <if test="empCond.username != null">
+                and username like concat('%',#{empCond.username},'%')
+            </if>
+        </where>
+        limit #{offset},#{limit}
     </select>
 </mapper>

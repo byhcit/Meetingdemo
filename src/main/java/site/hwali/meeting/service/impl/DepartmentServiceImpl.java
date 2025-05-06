@@ -14,7 +14,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     DepartmentMapper departmentMapper;
 
     @Override
-    public Department getDepById(Integer id) {
+    public Department getDepById(int id) {
         return departmentMapper.getDepById(id);
     }
 

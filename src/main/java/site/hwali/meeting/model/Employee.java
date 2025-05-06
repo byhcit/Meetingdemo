@@ -1,21 +1,21 @@
 package site.hwali.meeting.model;
 
 public class Employee {
-    private Integer employeeid;
+    private int employeeid;
     private String employeename;
     private String username;
     private String phone;
     private String email;
-    private Integer status;
-    private Integer departmentid;
+    private String status;
+    private int departmentid;
     private String password;
-    private Integer role;
+    private int role;
 
-    public Integer getEmployeeid() {
+    public int getEmployeeid() {
         return employeeid;
     }
 
-    public void setEmployeeid(Integer employeeid) {
+    public void setEmployeeid(int employeeid) {
         this.employeeid = employeeid;
     }
 
@@ -51,19 +51,19 @@ public class Employee {
         this.email = email;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Integer getDepartmentid() {
+    public int getDepartmentid() {
         return departmentid;
     }
 
-    public void setDepartmentid(Integer departmentid) {
+    public void setDepartmentid(int departmentid) {
         this.departmentid = departmentid;
     }
 
@@ -75,11 +75,11 @@ public class Employee {
         this.password = password;
     }
 
-    public Integer getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(Integer role) {
+    public void setRole(int role) {
         this.role = role;
     }
 

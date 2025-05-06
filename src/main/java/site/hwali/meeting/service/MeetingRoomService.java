@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface MeetingRoomService {
     List<MeetingRoom> getMrsByPage(int pageNum, int pageSize);
+
     int getTotalCount();
 
     MeetingRoom getMrById(int id);
@@ -13,4 +14,5 @@ public interface MeetingRoomService {
     int updateRoom(MeetingRoom meetingRoom);
 
     int addMr(MeetingRoom meetingRoom);
+
 }

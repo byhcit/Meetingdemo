@@ -29,7 +29,7 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
     public MeetingRoom getMrById(int id) {
         MeetingRoom mr = meetingRoomMapper.getMrById(id);
         if (mr != null && mr.getStatus() == null) {
-            mr.setStatus(0); // 设置默认状态为启用
+            mr.setStatus("0"); // 设置默认状态为启用
         }
         return mr;
     }

@@ -41,7 +41,7 @@
                                 <td>当前状态：</td>
                                 <td>
                                     <input type="radio" id="status" name="status" checked="checked" value="1"/><label for="status">启用</label>
-                                    <input type="radio" id="status" name="status"  value="0"/><label for="status">停用</label>
+                                    <input type="radio" id="status" name="status" value="0"/><label for="status">停用</label>
                                 </td>
                             </tr>
                             <tr>
