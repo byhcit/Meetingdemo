@@ -27,9 +27,9 @@
                                 </td>
                                 <td>状态：</td>
                                 <td>
-                                    <input type="radio" name="status" value="1" <#if (empCond.status!'') == '1'>checked="checked"</#if>/><label>已批准</label>
-                                    <input type="radio" name="status" value="0" <#if (empCond.status!'') == '0'>checked="checked"</#if>/><label>待审批</label>
-                                    <input type="radio" name="status" value="-1" <#if (empCond.status!'') == '-1'>checked="checked"</#if>/><label>已关闭</label>
+                                    <input type="radio" id="status" name="status" value="1" <#if empCond.status?? && empCond.status == '1'>checked="checked"</#if>/><label for="status">已批准</label>
+                                    <input type="radio" id="status" name="status" value="0" <#if empCond.status?? && empCond.status == '0'>checked="checked"</#if>/><label for="status">待审批</label>
+                                    <input type="radio" id="status" name="status" value="-1" <#if empCond.status?? && empCond.status == '-1'>checked="checked"</#if>/><label for="status">已关闭</label>
                                 </td>
                             </tr>
                             <tr>
