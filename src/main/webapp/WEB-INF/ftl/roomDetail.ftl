@@ -37,10 +37,10 @@
                             <tr>
                                 <td>当前状态：</td>
                                 <td>
-                                    <#list [1,0,2] as status>
+                                    <#list ["1","0","2"] as status>
                                         <input type="radio" id="status${status}" name="status" value="${status}"
                                             <#if mr.status == status>checked="checked"</#if>/>
-                                        <label for="status${status}">${(status==1)?string('启用',(status==0)?string('停用''已占用'))}</label>
+                                        <label for="status${status}">${(status=="1")?string('启用',(status=="0")?string('停用''已占用'))}</label>
                                     </#list>
                                 </td>
                             </tr>
