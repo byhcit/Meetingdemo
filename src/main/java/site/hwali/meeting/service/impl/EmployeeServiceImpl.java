@@ -40,12 +40,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmpsByStatus(int status, int pageNum, int pageSize) {
+    public List<Employee> getEmpsByStatus(String status, int pageNum, int pageSize) {
         return employeeMapper.getEmpsByStatus(status, (pageNum - 1) * pageSize, pageSize);
     }
 
     @Override
-    public int getTotalByStatus(int status) {
+    public int getTotalByStatus(String status) {
         return employeeMapper.getTotalByStatus(status);
     }
 

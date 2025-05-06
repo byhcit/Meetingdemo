@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import site.hwali.meeting.model.Employee;
 import site.hwali.meeting.service.EmployeeService;
+
 import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
 public class ApproveAccountController {
 
-    public static final int PENDING_APPROVE = 0; //待审批
+    public static final String PENDING_APPROVE = "0"; //待审批
 
     @Autowired
     EmployeeService employeeService;

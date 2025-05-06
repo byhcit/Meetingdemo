@@ -43,7 +43,9 @@
     <select id="getTotalByStatus" resultType="integer">
         select count(*)
         from employee
-        where status = #{status}
+        <if test="status != null">
+            where status = #{status}
+        </if>
     </select>
     <select id="getEmpsByPage" resultType="site.hwali.meeting.model.Employee">
         select * from employee

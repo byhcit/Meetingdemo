@@ -12,9 +12,9 @@ public interface EmployeeService {
 
     int updateStatus(int id, int status);
 
-    List<Employee> getEmpsByStatus(int status, int pageNum, int pageSize);
+    List<Employee> getEmpsByStatus(String status, int pageNum, int pageSize);
     
-    int getTotalByStatus(int status);
+    int getTotalByStatus(String status);
 
     List<Employee> getEmpsByPage(Employee empCond, int page, int size);
 }

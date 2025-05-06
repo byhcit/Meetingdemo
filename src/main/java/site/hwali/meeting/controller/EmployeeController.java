@@ -25,13 +25,13 @@ public class EmployeeController {
         System.out.println("empCond = " + empCond);
         List<Employee> emps = employeeService.getEmpsByPage(empCond, page, DEFAULT_PAGE_SIZE);
         // 获取总记录数
-        int total = emps.size();
+        int total = employeeService.getTotalByStatus(empCond.getStatus());
         // 计算总页数
         int totalPages = (total + DEFAULT_PAGE_SIZE - 1) / DEFAULT_PAGE_SIZE;
 
         // 获取分页数据
         model.addAttribute("emps", emps);
-        model.addAttribute("pageNum", page);
+        model.addAttribute("page", page);
         model.addAttribute("total", total);
         model.addAttribute("totalPages", totalPages);
 

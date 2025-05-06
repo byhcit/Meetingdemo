@@ -12,11 +12,11 @@ public interface EmployeeMapper {
 
     int updateStatus(@Param("employeeid") int id, @Param("status") int status);
 
-    List<Employee> getEmpsByStatus(@Param("status") int status, 
+    List<Employee> getEmpsByStatus(@Param("status") String status,
                                   @Param("offset") int offset, 
                                   @Param("limit") int limit);
     
-    int getTotalByStatus(@Param("status") int status);
+    int getTotalByStatus(@Param("status") String status);
 
     List<Employee> getEmpsByPage(@Param("empCond") Employee empCond, @Param("offset")int offset, int limit);
 }
