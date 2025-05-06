@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="site.hwali.meeting.mapper.MeetingRoomMapper">
+    <update id="updateRoom" parameterType="site.hwali.meeting.model.MeetingRoom">
+        update meetingroom
+        <set>
+            <if test="roomnum != null">roomnum = #{roomnum},</if>
+            <if test="roomname != null">roomname = #{roomname},</if>
+            <if test="capacity != null">capacity = #{capacity},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="description != null">description = #{description},</if>
+        </set>
+        where roomid = #{roomid}
+    </update>
+
+    <select id="getAllMr" resultType="site.hwali.meeting.model.MeetingRoom">
+        select * from meetingroom
+    </select>
+
+    <select id="selectByPage" resultType="site.hwali.meeting.model.MeetingRoom">
+        select * from meetingroom limit #{offset}, #{pageSize}
+    </select>
+
+    <select id="selectCount" resultType="int">
+        select count(*) from meetingroom
+    </select>
+
+    <select id="getMrById" resultType="site.hwali.meeting.model.MeetingRoom">
+        select * from meetingroom where roomid = #{id}
+    </select>
+</mapper>
