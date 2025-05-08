@@ -21,4 +21,6 @@ public interface EmployeeMapper {
     List<Employee> getEmpsByPage(@Param("empCond") Employee empCond, @Param("offset")int offset, int limit);
 
     void updateStatus(@Param("employeeid") int employeeid);
+
+    List<Employee> getEmpsByDepid(int id);
 }

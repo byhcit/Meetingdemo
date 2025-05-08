@@ -48,4 +48,8 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
         return meetingRoomMapper.addMr(meetingRoom);
     }
 
+    @Override
+    public List<MeetingRoom> getAllMrs() {
+        return meetingRoomMapper.getAllMr();
+    }
 }

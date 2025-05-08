@@ -18,4 +18,5 @@ public interface EmployeeService {
 
     List<Employee> getEmpsByPage(Employee empCond, int page, int size);
 
+    List<Employee> getEmpsByDepid(int id);
 }

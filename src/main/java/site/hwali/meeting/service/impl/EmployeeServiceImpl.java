@@ -53,4 +53,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getEmpsByPage(Employee empCond, int page, int size) {
         return employeeMapper.getEmpsByPage(empCond, (page - 1) * size, size);
     }
+
+    @Override
+    public List<Employee> getEmpsByDepid(int id) {
+        return employeeMapper.getEmpsByDepid(id);
+    }
 }

@@ -35,4 +35,7 @@
     <select id="getMrByRoomNum" resultType="site.hwali.meeting.model.MeetingRoom">
         select * from meetingroom where roomnum=#{roomnum}
     </select>
+    <select id="getAllMr" resultType="site.hwali.meeting.model.MeetingRoom">
+        select * from meetingroom
+    </select>
 </mapper>

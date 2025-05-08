@@ -63,6 +63,9 @@
                 selDepartments = document.getElementById("selDepartments");
                 selEmployees = document.getElementById("selEmployees");
                 selSelectedEmployees = document.getElementById("selSelectedEmployees");
+                console.log(selDepartments);
+                console.log(selEmployees);
+                console.log(selSelectedEmployees);
 
                 for(var i=0;i<data.length;i++){
                     var dep = document.createElement("option");

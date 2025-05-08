@@ -62,4 +62,9 @@
         </where>
         limit #{offset},#{limit}
     </select>
+    <select id="getEmpsByDepid" resultType="site.hwali.meeting.model.Employee">
+        select *
+        from employee
+        where departmentid = #{id}
+    </select>
 </mapper>

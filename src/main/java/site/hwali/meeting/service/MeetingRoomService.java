@@ -15,4 +15,5 @@ public interface MeetingRoomService {
 
     int addMr(MeetingRoom meetingRoom);
 
+    List<MeetingRoom> getAllMrs();
 }

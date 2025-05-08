@@ -1,4 +1,7 @@
 package site.hwali.meeting.mapper;
 
-public class MeetingMapper {
+import site.hwali.meeting.model.Meeting;
+
+public interface MeetingMapper {
+    int addMeeting(Meeting meeting);
 }
