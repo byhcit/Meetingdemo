@@ -26,7 +26,7 @@
     </select>
     <select id="getAllDeps" resultType="site.hwali.meeting.model.Department">
         select *
-        from department;
+        from department
     </select>
     <select id="getDeptCountByName" resultType="integer">
         select count(*)

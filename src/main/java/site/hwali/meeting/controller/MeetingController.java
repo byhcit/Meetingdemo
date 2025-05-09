@@ -33,15 +33,17 @@ public class MeetingController {
         return "bookMeeting";
     }
 
-    @RequestMapping("/addDeps")
+    @RequestMapping("/allDeps")
     @ResponseBody
     public List<Department> getAllDeps() {
+        System.out.println("departmentService.getAllDeps() = " + departmentService.getAllDeps());
         return departmentService.getAllDeps();
     }
 
-    @RequestMapping("getEmpsByDepid")
+    @RequestMapping("/getEmpsByDepid")
     @ResponseBody
     public List<Employee> getEmpsByDepid(int id) {
+        System.out.println("employeeService.getEmpsByDepid(id) = " + employeeService.getEmpsByDepid(id));
         return employeeService.getEmpsByDepid(id);
     }
 
