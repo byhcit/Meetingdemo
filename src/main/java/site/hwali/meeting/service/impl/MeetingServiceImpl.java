@@ -11,13 +11,14 @@ import java.util.Date;
 @Service
 public class MeetingServiceImpl implements MeetingService {
 
-   @Autowired
+    @Autowired
     MeetingMapper meetingMapper;
 
     @Override
     public int addMeeting(Meeting meeting, int[] mps) {
         meeting.setReservationtime(new Date());
-        meetingMapper.addMeeting(meeting);
-        return 0;
+        int result = meetingMapper.addMeeting(meeting);
+        meetingMapper.addParticipants(meeting.getMeetingid(),mps);
+        return result;
     }
 }

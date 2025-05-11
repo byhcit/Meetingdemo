@@ -4,6 +4,7 @@
         <title>CoolMeeting会议管理系统</title>
         <link rel="stylesheet" href="/styles/common.css"/>
         <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
+        <script src="/My97DatePicker/WdatePicker.js"></script>
         <style type="text/css">
             #divfrom{
                 float:left;
@@ -138,34 +139,32 @@
                 <div class="content-nav">
                     会议预定 > 预定会议
                 </div>
-                <form acion="/doAddMeeting" method="post">
+                <form action="/doAddMeeting" method="post">
                     <fieldset>
                         <legend>会议信息</legend>
                         <table class="formtable">
                             <tr>
                                 <td>会议名称：</td>
                                 <td>
-                                    <input type="text" id="meetingname" maxlength="20"/>
+                                    <input type="text" name="meetingname" maxlength="20"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>预计参加人数：</td>
                                 <td>
-                                    <input type="text" id="numofattendents" />
+                                    <input type="text" name="numberofparticipants" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>预计开始时间：</td>
                                 <td>
-                                    <input type="date" id="startdate"/>
-                                    <input type="time" id="starttime"/>
+                                    <input type="text" class="Wdate" name="starttime" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})">
                                 </td>
                             </tr>
                             <tr>
                                 <td>预计结束时间：</td>
                                 <td>
-                                    <input type="date" id="enddate" />
-                                    <input type="time" id="endtime" />
+                                    <input type="text" class="Wdate" name="endtime" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})">
                                 </td>
                             </tr>
 							<tr>
@@ -181,7 +180,7 @@
                             <tr>
                                 <td>会议说明：</td>
                                 <td>
-                                    <textarea id="description" rows="5"></textarea>
+                                    <textarea name="description" rows="5"></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -198,7 +197,7 @@
                                         <input type="button" class="clickbutton" value="&lt;" onclick="deSelectEmployees()"/>
                                     </div>
                                     <div id="divto">
-                                        <select id="selSelectedEmployees" multiple="true">
+                                        <select name="mps" id="selSelectedEmployees" multiple="true">
                                         </select>
                                     </div>
                                 </td>

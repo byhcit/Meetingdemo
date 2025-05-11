@@ -14,6 +14,7 @@ import site.hwali.meeting.service.EmployeeService;
 import site.hwali.meeting.service.MeetingRoomService;
 import site.hwali.meeting.service.MeetingService;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -49,6 +50,9 @@ public class MeetingController {
 
     @RequestMapping("/doAddMeeting")
     public String doAddMeeting(Meeting meeting, int[] mps, HttpSession session) {
+        System.out.println("meeting = " + meeting);
+        System.out.println("mps = " + (mps != null ? Arrays.toString(mps) : "null"));
+        
         Employee currentuser = (Employee) session.getAttribute("currentuser");
         meeting.setReservationistid(currentuser.getEmployeeid());
         int result = meetingService.addMeeting(meeting, mps);
