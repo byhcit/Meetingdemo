@@ -1,0 +1,63 @@
+<#setting date_format="yyyy-MM-dd HH:mm:ss">
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CoolMeeting会议管理系统</title>
+        <link rel="stylesheet" href="/styles/common.css"/>
+    </head>
+    <body>
+        <#include 'top.ftl'>
+        <div class="page-body">
+            <#include 'leftMenu.ftl'>
+            <div class="page-content">
+                <div class="content-nav">
+                    会议预定 > 会议详情
+                </div>
+                <table class="listtable">
+                    <tr>
+                        <th>会议名称</th>
+                        <td>${meeting.meetingname}</td>
+                        <th>会议室</th>
+                        <td>${meeting.roomname}</td>
+                    </tr>
+                    <tr>
+                        <th>会议开始时间</th>
+                        <td>${meeting.starttime?string("yyyy-MM-dd HH:mm:ss")}</td>
+                        <th>会议结束时间</th>
+                        <td>${meeting.endtime?string("yyyy-MM-dd HH:mm:ss")}</td>
+                    </tr>
+                    <tr>
+                        <th>会议预定时间</th>
+                        <td>${meeting.reservationtime?string("yyyy-MM-dd HH:mm:ss")}</td>
+                        <th>预定者</th>
+                        <td>${meeting.reservername}</td>
+                    </tr>
+                    <tr>
+                        <th>会议状态</th>
+                        <td>
+                            <#if meeting.status == "0">
+                                未开始
+                            <#elseif meeting.status == "1">
+                                进行中
+                            <#elseif meeting.status == "2">
+                                已结束
+                            <#elseif meeting.status == "3">
+                                已取消
+                            </#if>
+                        </td>
+                        <th>取消原因</th>
+                        <td>${meeting.canceledreason!''}</td>
+                    </tr>
+                    <tr>
+                        <th>会议说明</th>
+                        <td colspan="3">${meeting.description!''}</td>
+                    </tr>
+                </table>
+                <div class="command">
+                    <input type="button" class="clickbutton" value="返回" onclick="window.history.back();"/>
+                </div>
+            </div>
+        </div>
+        <#include 'footer.ftl'>
+    </body>
+</html> 

@@ -69,7 +69,7 @@ public class MeetingController {
             model.addAttribute("mrs", meetingRoomService.getAllMrs());
             model.addAttribute("meeting", meeting);  // 回填会议数据
             model.addAttribute("selectedMps", mps);  // 回填参会人员
-            return "bookMeeting";
+            return "forward:/bookMeeting";
         }
 
         // 检查会议时间
@@ -79,7 +79,7 @@ public class MeetingController {
             model.addAttribute("mrs", meetingRoomService.getAllMrs());
             model.addAttribute("meeting", meeting);  // 回填会议数据
             model.addAttribute("selectedMps", mps);  // 回填参会人员
-            return "bookMeeting";
+            return "forward:/bookMeeting";
         }
 
         Employee currentuser = (Employee) session.getAttribute("currentuser");
@@ -91,7 +91,7 @@ public class MeetingController {
             model.addAttribute("mrs", meetingRoomService.getAllMrs());
             model.addAttribute("meeting", meeting);  // 回填会议数据
             model.addAttribute("selectedMps", mps);  // 回填参会人员
-            return "bookMeeting";
+            return "forward:/bookMeeting";
         }
         return "redirect:/searchMeetings";
     }
