@@ -14,7 +14,7 @@
         </foreach>
     </insert>
 
-    <resultMap id="MeetingResultMap" type="site.hwali.meeting.model.Meeting">
+    <resultMap id="MeetingResultMap" type="site.hwali.meeting.model.dto.MeetingDTO">
         <id property="meetingid" column="meetingid"/>
         <result property="meetingname" column="meetingname"/>
         <result property="roomid" column="roomid"/>
@@ -26,6 +26,8 @@
         <result property="canceledtime" column="canceledtime"/>
         <result property="description" column="description"/>
         <result property="status" column="status"/>
+        <result property="roomname" column="roomname"/>
+        <result property="reservername" column="reservername"/>
     </resultMap>
 
     <sql id="searchCondition">
@@ -72,12 +74,24 @@
         <include refid="searchCondition"/>
     </select>
 
-    <select id="getMeetingDetails" resultType="site.hwali.meeting.model.dto.MeetingDTO">
+    <select id="getMeetingDetails" resultMap="MeetingResultMap">
         SELECT m.*, mr.roomname, e.employeename as reservername
         FROM meeting m
         LEFT JOIN meetingroom mr ON m.roomid = mr.roomid
         LEFT JOIN employee e ON m.reservationistid = e.employeeid
-        WHERE m.meetingid = #{id}
+        WHERE m.meetingid = #{meetingId}
+    </select>
+
+    <select id="isRoomOccupied" resultType="int">
+        SELECT COUNT(*)
+        FROM meeting
+        WHERE roomid = #{roomId}
+        AND status != '3'  -- 正在进行的会议
+        AND (
+            (starttime BETWEEN #{startTime} AND #{endTime})
+            OR (endtime BETWEEN #{startTime} AND #{endTime})
+            OR (starttime  &lt;= #{startTime} AND endtime >= #{endTime})
+        )
     </select>
 
 </mapper>

@@ -6,6 +6,7 @@ import site.hwali.meeting.model.Meeting;
 import site.hwali.meeting.model.dto.MeetingDTO;
 import site.hwali.meeting.model.query.MeetingSearchQuery;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -34,4 +35,9 @@ public interface MeetingMapper {
      * 添加会议参与者
      */
     void addParticipants(@Param("meetingid") int meetingId, @Param("mps") int[] mps);
+
+    /**
+     * 会议室是否占用
+     */
+    int isRoomOccupied(@Param("roomId") int roomId, @Param("startTime") Date startTime, @Param("endTime") Date endTime);
 }

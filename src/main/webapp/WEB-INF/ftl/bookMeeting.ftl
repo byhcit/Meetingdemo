@@ -60,8 +60,21 @@
                     selDepartments.appendChild(dep);
                     }
                     fillEmployees();
+                    <#if selectedMps??>
+                    var selectedMps = [<#list selectedMps as mp>${mp}<#if mp_has_next>,</#if></#list>];
+                    if (selectedMps.length > 0) {
+                        for (var i = 0; i < selDepartments.options.length; i++) {
+                            setTimeout(function() {
+                                for (var j = 0; j < selEmployees.options.length; j++) {
+                                    if (selectedMps.indexOf(parseInt(selEmployees.options[j].value)) !== -1) {
+                                        addEmployee(selEmployees.options[j]);
+                                    }
+                                }
+                            }, 100);
+                        }
+                    }
+                    </#if>
                 })
-
             }
 
             function fillEmployees(){
@@ -139,6 +152,9 @@
                 <div class="content-nav">
                     会议预定 > 预定会议
                 </div>
+                <#if error??>
+                    <div class="error-message" style="color: red; margin: 10px 0;">${error}</div>
+                </#if>
                 <form action="/doAddMeeting" method="post">
                     <fieldset>
                         <legend>会议信息</legend>
@@ -146,25 +162,25 @@
                             <tr>
                                 <td>会议名称：</td>
                                 <td>
-                                    <input type="text" name="meetingname" maxlength="20"/>
+                                    <input type="text" name="meetingname" maxlength="20" value="${(meeting.meetingname)!''}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>预计参加人数：</td>
                                 <td>
-                                    <input type="text" name="numberofparticipants" />
+                                    <input type="text" name="numberofparticipants" value="${(meeting.numberofparticipants)!''}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>预计开始时间：</td>
                                 <td>
-                                    <input type="text" class="Wdate" name="starttime" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})">
+                                    <input type="text" class="Wdate" name="starttime" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})" autocomplete="off" value="${(meeting.starttime?string('yyyy-MM-dd HH:mm:ss'))!''}">
                                 </td>
                             </tr>
                             <tr>
                                 <td>预计结束时间：</td>
                                 <td>
-                                    <input type="text" class="Wdate" name="endtime" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})">
+                                    <input type="text" class="Wdate" name="endtime" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})" autocomplete="off" value="${(meeting.endtime?string('yyyy-MM-dd HH:mm:ss'))!''}">
                                 </td>
                             </tr>
 							<tr>
@@ -172,7 +188,7 @@
                                 <td>
                                     <select name="roomid">
                                         <#list mrs as mr>
-                                            <option value="${mr.roomid}">${mr.roomname}</option>
+                                            <option value="${mr.roomid}" <#if meeting?? && meeting.roomid?? && meeting.roomid == mr.roomid>selected</#if>>${mr.roomname}</option>
                                         </#list>
                                      </select>
                                 </td>
@@ -180,7 +196,7 @@
                             <tr>
                                 <td>会议说明：</td>
                                 <td>
-                                    <textarea name="description" rows="5"></textarea>
+                                    <textarea name="description" rows="5">${(meeting.description)!''}</textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -205,7 +221,7 @@
                             <tr>
                                 <td class="command" colspan="2">
                                     <input type="submit" class="clickbutton" value="预定会议"/>
-                                    <input type="reset" class="clickbutton" value="重置"/>
+                                    <input type="button" class="clickbutton" value="重置" onclick="clearForm()"/>
                                 </td>
                             </tr>
                         </table>
@@ -214,5 +230,30 @@
             </div>
         </div>
         <#include 'footer.ftl'>
+        <script type="text/javascript">
+            function clearForm() {
+                // 清空所有输入字段
+                document.querySelector('input[name="meetingname"]').value = '';
+                document.querySelector('input[name="numberofparticipants"]').value = '';
+                document.querySelector('input[name="starttime"]').value = '';
+                document.querySelector('input[name="endtime"]').value = '';
+                document.querySelector('textarea[name="description"]').value = '';
+                
+                // 重置会议室选择
+                var roomSelect = document.querySelector('select[name="roomid"]');
+                if (roomSelect.options.length > 0) {
+                    roomSelect.selectedIndex = 0;
+                }
+                
+                // 清空选中的参会员工
+                clearList(document.getElementById('selSelectedEmployees'));
+                
+                // 清空错误信息
+                var errorDiv = document.querySelector('.error-message');
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+            }
+        </script>
     </body>
 </html>

@@ -4,6 +4,7 @@ import site.hwali.meeting.model.Meeting;
 import site.hwali.meeting.model.dto.MeetingDTO;
 import site.hwali.meeting.model.query.MeetingSearchQuery;
 
+import java.util.Date;
 import java.util.List;
 
 public interface MeetingService {
@@ -37,4 +38,6 @@ public interface MeetingService {
      * @return 会议详情
      */
     MeetingDTO getMeetingDetails(int id);
+
+    public boolean isRoomOccupied(int roomId, Date startTime, Date endTime);
 }
