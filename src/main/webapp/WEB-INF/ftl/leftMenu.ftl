@@ -2,7 +2,7 @@
     <div class="sidebar-menugroup">
         <div class="sidebar-grouptitle">个人中心</div>
         <ul class="sidebar-menu">
-            <li class="sidebar-menuitem"><a href="/notification">最新通知</a></li>
+            <li class="sidebar-menuitem"><a href="/notifications">最新通知</a></li>
             <li class="sidebar-menuitem active"><a href="/myBooking">我的预定</a></li>
             <li class="sidebar-menuitem"><a href="/myMeeting">我的会议</a></li>
         </ul>
@@ -26,7 +26,7 @@
             </#if>
             <li class="sidebar-menuitem"><a href="/meetingRoom">查看会议室</a></li>
             <li class="sidebar-menuitem"><a href="/bookMeeting">预定会议</a></li>
-            <li class="sidebar-menuitem"><a href="/searchMeeting">搜索会议</a></li>
+            <li class="sidebar-menuitem"><a href="/searchMeetings">搜索会议</a></li>
         </ul>
     </div>
 </div>

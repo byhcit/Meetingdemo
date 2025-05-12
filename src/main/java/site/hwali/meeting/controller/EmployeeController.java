@@ -10,10 +10,11 @@ import site.hwali.meeting.service.EmployeeService;
 
 import java.util.List;
 
+import static site.hwali.meeting.constant.PageConstants.DEFAULT_PAGE_SIZE;
+
 @Controller
 @RequestMapping("/admin")
 public class EmployeeController {
-    public static final int DEFAULT_PAGE_SIZE = 10;
 
     @Autowired
     EmployeeService employeeService;

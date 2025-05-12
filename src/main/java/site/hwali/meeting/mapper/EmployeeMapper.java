@@ -18,7 +18,7 @@ public interface EmployeeMapper {
     
     int getTotalByStatus(@Param("status") String status);
 
-    List<Employee> getEmpsByPage(@Param("empCond") Employee empCond, @Param("offset")int offset, int limit);
+    List<Employee> getEmpsByPage(@Param("empCond") Employee empCond, @Param("offset")int offset,@Param("limit") int limit);
 
     void updateStatus(@Param("employeeid") int employeeid);
 

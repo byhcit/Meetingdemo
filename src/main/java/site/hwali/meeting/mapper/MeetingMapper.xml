@@ -13,4 +13,71 @@
             (#{meetingid},#{mp})
         </foreach>
     </insert>
+
+    <resultMap id="MeetingResultMap" type="site.hwali.meeting.model.Meeting">
+        <id property="meetingid" column="meetingid"/>
+        <result property="meetingname" column="meetingname"/>
+        <result property="roomid" column="roomid"/>
+        <result property="reservationistid" column="reservationistid"/>
+        <result property="numberofparticipants" column="numberofparticipants"/>
+        <result property="starttime" column="starttime"/>
+        <result property="endtime" column="endtime"/>
+        <result property="reservationtime" column="reservationtime"/>
+        <result property="canceledtime" column="canceledtime"/>
+        <result property="description" column="description"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <sql id="searchCondition">
+        <where>
+            <if test="meetingCond.meetingname != null and meetingCond.meetingname != ''">
+                AND m.meetingname LIKE CONCAT('%', #{meetingCond.meetingname}, '%')
+            </if>
+            <if test="meetingCond.roomname != null and meetingCond.roomname != ''">
+                AND mr.roomname LIKE CONCAT('%', #{meetingCond.roomname}, '%')
+            </if>
+            <if test="meetingCond.reservername != null and meetingCond.reservername != ''">
+                AND e.employeename LIKE CONCAT('%', #{meetingCond.reservername}, '%')
+            </if>
+            <if test="meetingCond.reservefromdate != null and meetingCond.reservefromdate != ''">
+                AND m.reservationtime >= #{meetingCond.reservefromdate}
+            </if>
+            <if test="meetingCond.reservetodate != null and meetingCond.reservetodate != ''">
+                AND m.reservationtime &lt;= #{meetingCond.reservetodate}
+            </if>
+            <if test="meetingCond.meetingfromdate != null and meetingCond.meetingfromdate != ''">
+                AND m.starttime >= #{meetingCond.meetingfromdate}
+            </if>
+            <if test="meetingCond.meetingtodate != null and meetingCond.meetingtodate != ''">
+                AND m.endtime &lt;= #{meetingCond.meetingtodate}
+            </if>
+        </where>
+    </sql>
+
+    <select id="searchMeetings" resultType="site.hwali.meeting.model.dto.MeetingDTO">
+        SELECT m.*, mr.roomname, e.employeename as reservername
+        FROM meeting m
+        LEFT JOIN meetingroom mr ON m.roomid = mr.roomid
+        LEFT JOIN employee e ON m.reservationistid = e.employeeid
+        <include refid="searchCondition"/>
+        ORDER BY m.reservationtime DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="getTotalMeetings" resultType="int">
+        SELECT COUNT(*)
+        FROM meeting m
+        LEFT JOIN meetingroom mr ON m.roomid = mr.roomid
+        LEFT JOIN employee e ON m.reservationistid = e.employeeid
+        <include refid="searchCondition"/>
+    </select>
+
+    <select id="getMeetingDetails" resultType="site.hwali.meeting.model.dto.MeetingDTO">
+        SELECT m.*, mr.roomname, e.employeename as reservername
+        FROM meeting m
+        LEFT JOIN meetingroom mr ON m.roomid = mr.roomid
+        LEFT JOIN employee e ON m.reservationistid = e.employeeid
+        WHERE m.meetingid = #{id}
+    </select>
+
 </mapper>
