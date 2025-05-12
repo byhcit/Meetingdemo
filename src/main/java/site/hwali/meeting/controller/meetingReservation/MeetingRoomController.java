@@ -1,4 +1,4 @@
-package site.hwali.meeting.controller;
+package site.hwali.meeting.controller.meetingReservation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,24 +30,24 @@ public class MeetingRoomController {
         model.addAttribute("total", total);
         model.addAttribute("totalPages", totalPages);
 
-        return "meetingRoom";
+        return "/meetingReservation/meetingRoom";
     }
 
     @RequestMapping("/roomDetail")
     public String roomDetail(int id, Model model) {
         model.addAttribute("mr", meetingRoomService.getMrById(id));
-        return "roomDetail";
+        return "/meetingReservation/roomDetail";
     }
 
     @RequestMapping("/updateRoom")
     public String updateRoom(MeetingRoom meetingRoom) {
         int result = meetingRoomService.updateRoom(meetingRoom);
-        return result == 1 ? "redirect:/meetingRoom" : "forward:/roomDetail";
+        return result == 1 ? "/meetingReservation/meetingRoom" : "/meetingReservation/roomDetail";
     }
 
     @RequestMapping("/admin/addMeetingRoom")
     public String addMeetingRoom() {
-        return "addMeetingRoom";
+        return "/meetingReservation/addMeetingRoom";
     }
 
     @RequestMapping("/admin/doAddMr")
@@ -58,7 +58,7 @@ public class MeetingRoomController {
             return "forward:/admin/addMeetingRoom";
         }
         if (result == 1) {
-            return "redirect:/meetingRoom";
+            return "/meetingReservation/meetingRoom";
         } else {
             model.addAttribute("error", "添加失败，请重试！");
             return "redirect:/admin/addMeetingRoom";

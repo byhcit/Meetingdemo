@@ -9,9 +9,9 @@
         </style>
     </head>
     <body>
-        <#include 'top.ftl'>
+        <#include '../layout/top.ftl'>
         <div class="page-body">
-            <#include 'leftMenu.ftl'>
+            <#include '../layout/leftMenu.ftl'>
             <div class="page-content">
                 <div class="content-nav">
                     会议预定 > 搜索会议
@@ -130,7 +130,7 @@
                 </table>
             </div>
         </div>
-        <#include 'footer.ftl'>
+        <#include '../layout/footer.ftl'>
     </body>
     <script>
         function goToPage() {

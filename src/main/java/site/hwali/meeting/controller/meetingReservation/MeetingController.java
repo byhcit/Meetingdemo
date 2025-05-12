@@ -1,4 +1,4 @@
-package site.hwali.meeting.controller;
+package site.hwali.meeting.controller.meetingReservation;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.BeanUtils;
@@ -40,7 +40,7 @@ public class MeetingController {
     @RequestMapping("/bookMeeting")
     public String bookMeeting(Model model) {
         model.addAttribute("mrs", meetingRoomService.getAllMrs());
-        return "bookMeeting";
+        return "/meetingReservation/bookMeeting";
     }
 
     @RequestMapping("/allDeps")
@@ -69,7 +69,7 @@ public class MeetingController {
             model.addAttribute("mrs", meetingRoomService.getAllMrs());
             model.addAttribute("meeting", meeting);  // 回填会议数据
             model.addAttribute("selectedMps", mps);  // 回填参会人员
-            return "forward:/bookMeeting";
+            return "/meetingReservation/bookMeeting";
         }
 
         // 检查会议时间
@@ -79,7 +79,7 @@ public class MeetingController {
             model.addAttribute("mrs", meetingRoomService.getAllMrs());
             model.addAttribute("meeting", meeting);  // 回填会议数据
             model.addAttribute("selectedMps", mps);  // 回填参会人员
-            return "forward:/bookMeeting";
+            return "/meetingReservation/bookMeeting";
         }
 
         Employee currentuser = (Employee) session.getAttribute("currentuser");
@@ -91,7 +91,7 @@ public class MeetingController {
             model.addAttribute("mrs", meetingRoomService.getAllMrs());
             model.addAttribute("meeting", meeting);  // 回填会议数据
             model.addAttribute("selectedMps", mps);  // 回填参会人员
-            return "forward:/bookMeeting";
+            return "/meetingReservation/bookMeeting";
         }
         return "redirect:/searchMeetings";
     }
@@ -172,7 +172,7 @@ public class MeetingController {
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("meetingCond", searchVO);
 
-        return "searchMeeting";
+        return "/meetingReservation/searchMeeting";
     }
 
     @RequestMapping("/meetingdetails")
@@ -183,6 +183,6 @@ public class MeetingController {
             BeanUtils.copyProperties(meeting, meetingVo);
             model.addAttribute("meeting", meetingVo);
         }
-        return "meetingDetail";
+        return "/meetingReservation/meetingDetail";
     }
 }

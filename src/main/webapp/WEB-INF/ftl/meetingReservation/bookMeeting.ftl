@@ -145,9 +145,9 @@
         </script>
     </head>
     <body onload="body_load()">
-        <#include 'top.ftl'>
+        <#include '../layout/top.ftl'>
         <div class="page-body">
-            <#include 'leftMenu.ftl'>
+            <#include '../layout/leftMenu.ftl'>
             <div class="page-content">
                 <div class="content-nav">
                     会议预定 > 预定会议
@@ -229,7 +229,7 @@
                 </form>
             </div>
         </div>
-        <#include 'footer.ftl'>
+        <#include '../layout/footer.ftl'>
         <script type="text/javascript">
             function clearForm() {
                 // 清空所有输入字段

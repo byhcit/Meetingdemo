@@ -6,9 +6,9 @@
         <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
     </head>
     <body>
-        <#include 'top.ftl'>
+        <#include '../layout/top.ftl'>
         <div class="page-body">
-            <#include 'leftMenu.ftl'>
+            <#include '../layout/leftMenu.ftl'>
             <div class="page-content">
                 <div class="content-nav">
                     人员管理 > 部门管理
@@ -46,7 +46,7 @@
                 </table>
             </div>
         </div>
-        <#include 'footer.ftl'>
+        <#include '../layout/footer.ftl'>
     <script>
         var depName;
         function editDep(depid){

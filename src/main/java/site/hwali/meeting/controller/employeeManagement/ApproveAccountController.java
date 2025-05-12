@@ -1,4 +1,4 @@
-package site.hwali.meeting.controller;
+package site.hwali.meeting.controller.employeeManagement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +35,7 @@ public class ApproveAccountController {
         model.addAttribute("pageSize", pageSize);
         model.addAttribute("total", total);
         model.addAttribute("totalPages", totalPages);
-        return "approveAccount";
+        return "/employeeManagement/approveAccount";
     }
 
     @RequestMapping("/updateStatus")

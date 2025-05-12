@@ -51,7 +51,7 @@ public class LoginController {
     public String register(Model model) {
         List<Department> deps = departmentService.getAllDeps();
         model.addAttribute("deps", deps);
-        return "register";
+        return "/employeeManagement/register";
     }
 
     @RequestMapping("/doReg")
@@ -62,7 +62,7 @@ public class LoginController {
         } else {
             model.addAttribute("error", "注册失败");
             model.addAttribute("employee",employee);
-            return "forward:/register";
+            return "/employeeManagement/register";
         }
     }
 }

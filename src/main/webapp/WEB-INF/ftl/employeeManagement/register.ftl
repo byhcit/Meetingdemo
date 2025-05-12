@@ -8,9 +8,9 @@
         </style>
     </head>
     <body>
-        <#include 'top.ftl'>
+        <#include '../layout/top.ftl'>
         <div class="page-body">
-            <#include 'leftMenu.ftl'>
+            <#include '../layout/leftMenu.ftl'>
             <div class="page-content">
                 <div class="content-nav">
                     人员管理 > 员工注册
@@ -80,7 +80,7 @@
                 </form>
             </div>
         </div>
-        <#include 'footer.ftl'>
+        <#include '../layout/footer.ftl'>
     <script>
         function checkLen(){
             var password = document.getElementById("password");

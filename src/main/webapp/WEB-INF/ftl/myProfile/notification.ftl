@@ -5,9 +5,9 @@
         <link rel="stylesheet" href="/styles/common.css"/>
     </head>
     <body>
-    <#include 'top.ftl'>
+    <#include '../layout/top.ftl'>
     <div class="page-body">
-        <#include 'leftMenu.ftl'>
+        <#include '../layout/leftMenu.ftl'>
             <div class="page-content">
                 <div class="content-nav">
                     个人中心 > <a href="notifications">最新通知</a>
@@ -97,6 +97,6 @@
                 
             </div>
         </div>
-    <#include 'footer.ftl'>
+    <#include '../layout/footer.ftl'>
     </body>
 </html>

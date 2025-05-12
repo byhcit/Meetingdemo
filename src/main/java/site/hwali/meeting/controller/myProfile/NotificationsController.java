@@ -1,4 +1,4 @@
-package site.hwali.meeting.controller;
+package site.hwali.meeting.controller.myProfile;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class NotificationsController {
     @GetMapping("/notifications")
     public String notifactions(){
-        return "/notification";
+        return "/myProfile/notification";
     }
 }

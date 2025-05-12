@@ -1,4 +1,4 @@
-package site.hwali.meeting.controller;
+package site.hwali.meeting.controller.employeeManagement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +36,7 @@ public class EmployeeController {
         model.addAttribute("total", total);
         model.addAttribute("totalPages", totalPages);
 
-        return "searchEmployee";
+        return "/employeeManagement/searchEmployee";
     }
 
     @RequestMapping("/disableEmp")

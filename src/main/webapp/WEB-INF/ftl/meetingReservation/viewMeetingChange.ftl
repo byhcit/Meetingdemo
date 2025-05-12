@@ -146,9 +146,9 @@
         </script>
     </head>
     <body onload="body_load()">
-        <#include 'top.ftl'>
+        <#include '../layout/top.ftl'>
         <div class="page-body">
-            <#include 'leftMenu.ftl'>
+            <#include '../layout/leftMenu.ftl'>
             <div class="page-content">
                 <div class="content-nav">
                     会议预定 > 修改会议预定
@@ -159,72 +159,28 @@
                         <table class="formtable">
                             <tr>
                                 <td>会议名称：</td>
-                                <td>市场部总结会议</td>
+                                <td>销售洽谈会</td>
                             </tr>
                             <tr>
-                                <td>预计参加人数：</td>
-                                <td>15</td>
+                                <td>原定会议室:</td>
+                                <td>第一会议室</td>
+                                <td>变更会议室:</td>
+                                <td><span style="color:red">第二会议室</span></td>
                             </tr>
                             <tr>
                                 <td>预计开始时间：</td>
-                                <td>2013-10-21 14:50</td>
+                                <td>2013-10-21 14：50</td>
+                                <td>变更开始时间：</td>
+                                <td><span style="color:red">2013-10-22 14：50</span></td>
                             </tr>
                             <tr>
                                 <td>预计结束时间：</td>
-                                <td>2013-10-21 18:50
-                                </td>
+                                <td>2013-10-21 16：00</td>
+                                <td>变更结束时间：</td>
+                                <td><span style="color:red">2013-10-22 16：50</span></td>
                             </tr>
                             <tr>
-                                <td>会议说明：</td>
-                                <td>
-                                    <textarea id="description" rows="5" readonly>本会议将邀请专家参加。</textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>参会人员：</td>
-                                <td>
-                                    <table class="listtable">
-                                        <tr class="listheader">
-                                            <th>姓名</th>
-                                            <th>联系电话</th>
-                                            <td>电子邮件</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="command" colspan="2">
-                                    <input type="button" class="clickbutton" value="撤销会议" onclick="window.location.href='cancelmeeting.html';"/>
+                                <td colspan="4" class="command">
                                     <input type="button" class="clickbutton" value="返回" onclick="window.history.back();"/>
                                 </td>
                             </tr>
@@ -233,6 +189,6 @@
                 </form>
             </div>
         </div>
-        <#include 'footer.ftl'>
+        <#include '../layout/footer.ftl'>
     </body>
 </html>

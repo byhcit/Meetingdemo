@@ -1,4 +1,4 @@
-package site.hwali.meeting.controller;
+package site.hwali.meeting.controller.employeeManagement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ public class DepartmentController {
     @RequestMapping("/deps")
     public String departments(Model model) {
         model.addAttribute("deps", departmentService.getAllDeps());
-        return "/department";
+        return "/employeeManagement/department";
     }
 
     @RequestMapping("/addDept")
