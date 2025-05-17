@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="site.hwali.meeting.mapper.NoticesMapper">
+    <resultMap id="NoticeResultMap" type="site.hwali.meeting.model.dto.NoticeDto">
+        <result property="meetingId" column="meetingid"/>
+        <result property="meetingName" column="meetingname"/>
+        <result property="roomName" column="roomname"/>
+        <result property="startTime" column="starttime"/>
+        <result property="endTime" column="endtime"/>
+    </resultMap>
+
+    <select id="getUpcomingMeetings" resultMap="NoticeResultMap">
+        SELECT m.meetingid, m.meetingname, r.roomname, m.starttime, m.endtime
+        FROM meeting m
+        JOIN meetingroom r ON m.roomid = r.roomid
+        JOIN meetingparticipants mp ON m.meetingid = mp.meetingid
+        WHERE mp.employeeid = #{empId}
+        AND m.status = '0'
+        AND m.starttime BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="getCancelledMeetings" resultMap="NoticeResultMap">
+        SELECT m.meetingid,m.meetingname, r.roomname, m.starttime, m.endtime
+        FROM meeting m
+        JOIN meetingroom r ON m.roomid = r.roomid
+        JOIN meetingparticipants mp ON m.meetingid = mp.meetingid
+        WHERE mp.employeeid = #{empId}
+        AND m.status = '3'
+        ORDER BY m.canceledtime DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="getUpcomingMeetingsCount" resultType="int">
+        SELECT COUNT(*)
+        FROM meeting m
+        JOIN meetingparticipants mp ON m.meetingid = mp.meetingid
+        WHERE mp.employeeid = #{empId}
+        AND m.status = '0'
+        AND m.starttime BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)
+    </select>
+
+    <select id="getCancelledMeetingsCount" resultType="int">
+        SELECT COUNT(*)
+        FROM meeting m
+        JOIN meetingparticipants mp ON m.meetingid = mp.meetingid
+        WHERE mp.employeeid = #{empId}
+        AND m.status = '3'
+    </select>
+</mapper>

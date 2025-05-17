@@ -28,7 +28,7 @@
                                 <td>${mr.roomnum}</td>
                                 <td>${mr.roomname}</td>
                                 <td>${mr.capacity}</td>
-                                <td>${("1" == mr.status)?string('启用',(mr.status=="0")?string('停用''已占用'))}</td>
+                                <td>${("1" == mr.status)?string('启用',(mr.status=="0")?string('停用','已占用'))}</td>
                                 <td>
                                     <a class="clickbutton" href="/roomDetail?id=${mr.roomid}">查看详情</a>
                                 </td>
@@ -36,8 +36,10 @@
                         </#list>
                     </#if>
                 </table>
-                <#include '../common/pagination.ftl'>
-                <@pagination pageNum=pageNum pageSize=pageSize total=total totalPages=totalPages url="/meetingRoom"/>
+                <#if total?? && total gt 0>
+                    <#include '../common/pagination.ftl'>
+                    <@pagination pageNum=pageNum!1 pageSize=pageSize!10 total=total totalPages=totalPages!1 url="/meetingRoom"/>
+                </#if>
             </div>
         </div>
         <#include '../layout/footer.ftl'>

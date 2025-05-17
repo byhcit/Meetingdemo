@@ -58,7 +58,7 @@ public class MeetingRoomController {
             return "forward:/admin/addMeetingRoom";
         }
         if (result == 1) {
-            return "/meetingReservation/meetingRoom";
+            return "redirect:/meetingRoom";
         } else {
             model.addAttribute("error", "添加失败，请重试！");
             return "redirect:/admin/addMeetingRoom";

@@ -10,11 +10,11 @@ import site.hwali.meeting.service.EmployeeService;
 
 import java.util.List;
 
+import static site.hwali.meeting.constant.PageConstants.PENDING_APPROVE;
+
 @Controller
 @RequestMapping("/admin")
 public class ApproveAccountController {
-
-    public static final String PENDING_APPROVE = "0"; //待审批
 
     @Autowired
     EmployeeService employeeService;
