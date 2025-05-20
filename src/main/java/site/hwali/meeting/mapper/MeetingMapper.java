@@ -40,4 +40,16 @@ public interface MeetingMapper {
      * 会议室是否占用
      */
     int isRoomOccupied(@Param("roomId") int roomId, @Param("startTime") Date startTime, @Param("endTime") Date endTime);
+
+    List<MeetingDTO> getMyMeetings(@Param("offset") int offset,@Param("pageSize") int pageSize,@Param("id") int id);
+
+    int selectCount(int id);
+
+    int getMyBookingCount(int id);
+
+    List<MeetingDTO> getMyBooking(int offset, int pageSize, int id);
+
+    int cancelMeeting(@Param("id") int id,@Param("canceledTime") Date canceledTime,@Param("canceledreason") String canceledreason);
+
+    MeetingDTO getMeetingById(int id);
 }

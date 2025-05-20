@@ -3,6 +3,40 @@
     <head>
         <title>CoolMeeting会议管理系统</title>
         <link rel="stylesheet" href="/styles/common.css"/>
+        <style>
+            .cell {
+                max-width: 200px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .cell:hover {
+                position: relative;
+            }
+            .cell:hover::after {
+                content: attr(title);
+                position: absolute;
+                left: 0;
+                top: 100%;
+                background: white;
+                border: 1px solid #ccc;
+                padding: 5px;
+                z-index: 1000;
+                white-space: normal;
+                width: 200px;
+                box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            }
+            .listtable {
+                width: 100%;
+                table-layout: fixed;
+            }
+            .listtable th:nth-child(1) { width: 25%; }
+            .listtable th:nth-child(2) { width: 15%; }
+            .listtable th:nth-child(3) { width: 15%; }
+            .listtable th:nth-child(4) { width: 15%; }
+            .listtable th:nth-child(5) { width: 20%; }
+            .listtable th:nth-child(6) { width: 10%; }
+        </style>
     </head>
     <body>
     <#include '../layout/top.ftl'>
@@ -36,48 +70,21 @@
                         <th>结束时间</th>
                         <th style="width:100px">操作</th>
                     </tr>
-                    <#if upcomingMeetings?? && upcomingMeetings?size gt 0>
-                            <#list upcomingMeetings as m>
-                                <tr>
-                                <td>${m.meetingName}</td>
-                                <td>${m.roomName}</td>
-                                <td>${m.startTime}</td>
-                                <td>${m.endTime}</td>
+                    <#if upcomingMeetings?? && upcomingMeetings?is_sequence && upcomingMeetings?size gt 0>
+                        <#list upcomingMeetings as m>
+                            <tr>
+                                <td class="cell" title="${m.meetingName}">${m.meetingName}</td>
+                                <td class="cell" title="${m.roomName}">${m.roomName}</td>
+                                <td class="cell" title="${m.startTime}">${m.startTime}</td>
+                                <td class="cell" title="${m.endTime}">${m.endTime}</td>
                                 <td><a class="clickbutton" href="/meetingdetails?id=${m.meetingId}">查看详情</a></td>
-                                </tr>
-                            </#list>
+                            </tr>
+                        </#list>
                     <#else>
                         <tr>
                             <td colspan="5" style="text-align: center; padding: 20px; color: #666;">未来7天内没有您要参加的会议</td>
                         </tr>
                     </#if>
-<#--                    <tr>-->
-<#--                        <td>三季度销售总结会</td>-->
-<#--                        <td>第一会议室</td>-->
-<#--                        <td>2013-11-20 9：00</td>-->
-<#--                        <td>2013-11-20 11：00</td>-->
-<#--                        <td>-->
-<#--                            <a class="clickbutton" href="meetingdetails.html">查看详情</a>-->
-<#--                        </td>-->
-<#--                    </tr>-->
-<#--                    <tr>-->
-<#--                        <td>与Google合作推广Android技术培训会议</td>-->
-<#--                        <td>第三会议室</td>-->
-<#--                        <td>2013-11-18 9：00</td>-->
-<#--                        <td>2013-11-18 11：00</td>-->
-<#--                        <td>-->
-<#--                            <a class="clickbutton" href="meetingdetails.html">查看详情</a>-->
-<#--                        </td>-->
-<#--                    </tr>-->
-<#--                    <tr>-->
-<#--                        <td>员工例行面谈</td>-->
-<#--                        <td>小会议室</td>-->
-<#--                        <td>2013-11-16 16：00</td>-->
-<#--                        <td>2013-11-16 17：00</td>-->
-<#--                        <td>-->
-<#--                            <a class="clickbutton" href="meetingdetails.html">查看详情</a>-->
-<#--                        </td>-->
-<#--                    </tr>-->
                 </table>
                 <table class="listtable">
                     <caption style="text-align:left; position:relative;">
@@ -104,47 +111,22 @@
                         <th>取消原因</th>
                         <th style="width:100px">操作</th>
                     </tr>
-                    <tr>
-                        <#if cancelledMeetings?? && cancelledMeetings?size gt 0>
+                        <#if cancelledMeetings?? && cancelledMeetings?is_sequence && cancelledMeetings?size gt 0>
                             <#list cancelledMeetings as m>
-                                <td>${m.meetingName}</td>
-                                <td>${m.roomName}</td>
-                                <td>${m.startTime}</td>
-                                <td>${m.endTime}</td>
-                                <td><a class="clickbutton" href="/meetingdetails?id=${m.meetingId}">查看详情</a></td>
+                                <tr>
+                                    <td class="cell" title="${m.meetingName}">${m.meetingName}</td>
+                                    <td class="cell" title="${m.roomName}">${m.roomName}</td>
+                                    <td class="cell" title="${m.startTime}">${m.startTime}</td>
+                                    <td class="cell" title="${m.endTime}">${m.endTime}</td>
+                                    <td class="cell" title="${m.canceledReason!''}">${m.canceledReason!''}</td>
+                                    <td><a class="clickbutton" href="/meetingdetails?id=${m.meetingId}">查看详情</a></td>
+                                </tr>
                             </#list>
                         <#else>
-                            <td colspan="5" style="text-align: center; padding: 20px; color: #666;">没有已取消的会议</td>
+                            <tr>
+                                <td colspan="5" style="text-align: center; padding: 20px; color: #666;">没有已取消的会议</td>
+                            </tr>
                         </#if>
-<#--                        <td>三季度销售总结会</td>-->
-<#--                        <td>第一会议室</td>-->
-<#--                        <td>2013-11-20 9：00</td>-->
-<#--                        <td>2013-11-20 11：00</td>-->
-<#--                        <td>人员出差</td>-->
-<#--                        <td>-->
-<#--                            <a class="clickbutton" href="meetingdetails.html">查看详情</a>-->
-<#--                        </td>-->
-                    </tr>
-<#--                    <tr>-->
-<#--                        <td>与Google合作推广Android技术培训会议</td>-->
-<#--                        <td>第三会议室</td>-->
-<#--                        <td>2013-11-18 9：00</td>-->
-<#--                        <td>2013-11-18 11：00</td>-->
-<#--                        <td>人员出差</td>-->
-<#--                        <td>-->
-<#--                            <a class="clickbutton" href="meetingdetails.html">查看详情</a>-->
-<#--                        </td>-->
-<#--                    </tr>-->
-<#--                    <tr>-->
-<#--                        <td>员工例行面谈</td>-->
-<#--                        <td>小会议室</td>-->
-<#--                        <td>2013-11-16 16：00</td>-->
-<#--                        <td>2013-11-16 17：00</td>-->
-<#--                        <td>人员出差</td>-->
-<#--                        <td>-->
-<#--                            <a class="clickbutton" href="meetingdetails.html">查看详情</a>-->
-<#--                        </td>-->
-<#--                    </tr>-->
                 </table>
                 
             </div>

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import site.hwali.meeting.converter.BeanConverter;
 import site.hwali.meeting.model.Department;
 import site.hwali.meeting.model.Employee;
 import site.hwali.meeting.model.Meeting;
@@ -22,7 +23,6 @@ import site.hwali.meeting.service.MeetingService;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static site.hwali.meeting.constant.PageConstants.DEFAULT_PAGE_SIZE;
 
@@ -155,13 +155,7 @@ public class MeetingController {
         BeanUtils.copyProperties(searchVO, query);
         System.out.println("query = " + query);
         List<MeetingDTO> meetings = meetingService.searchMeetings(query, page, DEFAULT_PAGE_SIZE);
-        List<MeetingVO> mLst = meetings.stream()
-                .map(dto -> {
-                    MeetingVO vo = new MeetingVO();
-                    BeanUtils.copyProperties(dto, vo);
-                    return vo;
-                })
-                .collect(Collectors.toList());
+        List<MeetingVO> mLst = BeanConverter.convertLst(meetings, MeetingVO.class);
         int total = meetingService.getTotalMeetings(query);
         // 计算总页数
         int totalPages = (total + DEFAULT_PAGE_SIZE - 1) / DEFAULT_PAGE_SIZE;
@@ -178,11 +172,11 @@ public class MeetingController {
     @RequestMapping("/meetingdetails")
     public String meetingDetails(int id, Model model) {
         MeetingDTO meeting = meetingService.getMeetingDetails(id);
+        MeetingVO meetingVo = new MeetingVO();
         if (meeting != null) {
-            MeetingVO meetingVo = new MeetingVO();
             BeanUtils.copyProperties(meeting, meetingVo);
-            model.addAttribute("meeting", meetingVo);
         }
+        model.addAttribute("meeting", meetingVo);
         return "/meetingReservation/meetingDetail";
     }
 }

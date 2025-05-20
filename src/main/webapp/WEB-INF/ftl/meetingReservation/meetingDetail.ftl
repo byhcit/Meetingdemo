@@ -4,6 +4,30 @@
     <head>
         <title>CoolMeeting会议管理系统</title>
         <link rel="stylesheet" href="/styles/common.css"/>
+        <style>
+            .cell {
+                max-width: 200px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .cell:hover {
+                position: relative;
+            }
+            .cell:hover::after {
+                content: attr(title);
+                position: absolute;
+                left: 0;
+                top: 100%;
+                background: white;
+                border: 1px solid #ccc;
+                padding: 5px;
+                z-index: 1000;
+                white-space: normal;
+                width: 200px;
+                box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            }
+        </style>
     </head>
     <body>
         <#include '../layout/top.ftl'>
@@ -46,7 +70,7 @@
                             </#if>
                         </td>
                         <th>取消原因</th>
-                        <td>${meeting.canceledreason!''}</td>
+                        <td class="cell" title="${meeting.canceledReason!''}">${meeting.canceledReason!''}</td>
                     </tr>
                     <tr>
                         <th>会议说明</th>

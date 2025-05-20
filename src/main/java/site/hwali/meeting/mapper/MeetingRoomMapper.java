@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface MeetingRoomMapper {
     List<MeetingRoom> selectByPage(int offset, int pageSize);
+
     int selectCount();
 
     MeetingRoom getMrById(int id);

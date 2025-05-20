@@ -2,8 +2,10 @@ package site.hwali.meeting.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import site.hwali.meeting.converter.BeanConverter;
 import site.hwali.meeting.mapper.NoticesMapper;
 import site.hwali.meeting.model.dto.NoticeDto;
+import site.hwali.meeting.model.vo.NoticeVo;
 import site.hwali.meeting.service.NotificationService;
 
 import java.util.HashMap;
@@ -30,14 +32,14 @@ public class NotificationServiceImpl implements NotificationService {
             List<NoticeDto> upcomingMeetings = noticesMapper.getUpcomingMeetings(empId, 0, noticesSize);
             int upcomingTotal = noticesMapper.getUpcomingMeetingsCount(empId);
             int upcomingTotalPages = (int) Math.ceil((double) upcomingTotal / noticesSize);
-            result.put("upcomingMeetings", upcomingMeetings);
+            result.put("upcomingMeetings", BeanConverter.convertLst(upcomingMeetings, NoticeVo.class));
             result.put("upcomingTotalPages", upcomingTotalPages);
             
             // 加载已取消会议
             List<NoticeDto> cancelledMeetings = noticesMapper.getCancelledMeetings(empId, 0, noticesSize);
             int cancelledTotal = noticesMapper.getCancelledMeetingsCount(empId);
             int cancelledTotalPages = (int) Math.ceil((double) cancelledTotal / noticesSize);
-            result.put("cancelledMeetings", cancelledMeetings);
+            result.put("cancelledMeetings", BeanConverter.convertLst(cancelledMeetings, NoticeVo.class));
             result.put("cancelledTotalPages", cancelledTotalPages);
         } else {
             // 根据点击的分页按钮决定查询哪种会议
@@ -46,7 +48,7 @@ public class NotificationServiceImpl implements NotificationService {
                 List<NoticeDto> upcomingMeetings = noticesMapper.getUpcomingMeetings(empId, upcomingOffset, noticesSize);
                 int upcomingTotal = noticesMapper.getUpcomingMeetingsCount(empId);
                 int upcomingTotalPages = (int) Math.ceil((double) upcomingTotal / noticesSize);
-                result.put("upcomingMeetings", upcomingMeetings);
+                result.put("upcomingMeetings", BeanConverter.convertLst(upcomingMeetings, NoticeVo.class));
                 result.put("upcomingTotalPages", upcomingTotalPages);
             }
             
@@ -55,7 +57,7 @@ public class NotificationServiceImpl implements NotificationService {
                 List<NoticeDto> cancelledMeetings = noticesMapper.getCancelledMeetings(empId, cancelledOffset, noticesSize);
                 int cancelledTotal = noticesMapper.getCancelledMeetingsCount(empId);
                 int cancelledTotalPages = (int) Math.ceil((double) cancelledTotal / noticesSize);
-                result.put("cancelledMeetings", cancelledMeetings);
+                result.put("cancelledMeetings", BeanConverter.convertLst(cancelledMeetings, NoticeVo.class));
                 result.put("cancelledTotalPages", cancelledTotalPages);
             }
         }

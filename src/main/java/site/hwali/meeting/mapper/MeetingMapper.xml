@@ -3,8 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="site.hwali.meeting.mapper.MeetingMapper">
 
-    <insert id="addMeeting" parameterType="site.hwali.meeting.model.Meeting" useGeneratedKeys="true" keyProperty="meetingid">
-        insert into meeting (meetingname,roomid,reservationistid,numberofparticipants,starttime,endtime,reservationtime,canceledtime,description,status) values (#{meetingname},#{roomid},#{reservationistid},#{numberofparticipants},#{starttime},#{endtime},#{reservationtime},#{canceledtime},#{description},#{status})
+    <insert id="addMeeting" parameterType="site.hwali.meeting.model.Meeting" useGeneratedKeys="true"
+            keyProperty="meetingid">
+        insert into meeting (meetingname, roomid, reservationistid, numberofparticipants, starttime, endtime,
+                             reservationtime, canceledtime, description, status)
+        values (#{meetingname}, #{roomid}, #{reservationistid}, #{numberofparticipants}, #{starttime}, #{endtime},
+                #{reservationtime}, #{canceledtime}, #{description}, #{status})
     </insert>
 
     <insert id="addParticipants">
@@ -13,6 +17,12 @@
             (#{meetingid},#{mp})
         </foreach>
     </insert>
+
+    <delete id="cancelMeeting">
+        UPDATE meeting
+        SET status = '3', canceledTime = #{canceledTime},canceledreason = #{canceledreason}
+        WHERE meetingid = #{id}
+    </delete>
 
     <resultMap id="MeetingResultMap" type="site.hwali.meeting.model.dto.MeetingDTO">
         <id property="meetingid" column="meetingid"/>
@@ -28,6 +38,7 @@
         <result property="status" column="status"/>
         <result property="roomname" column="roomname"/>
         <result property="reservername" column="reservername"/>
+        <result property="canceledreason" column="canceledReason"/>
     </resultMap>
 
     <sql id="searchCondition">
@@ -77,8 +88,8 @@
     <select id="getMeetingDetails" resultMap="MeetingResultMap">
         SELECT m.*, mr.roomname, e.employeename as reservername
         FROM meeting m
-        LEFT JOIN meetingroom mr ON m.roomid = mr.roomid
-        LEFT JOIN employee e ON m.reservationistid = e.employeeid
+                 LEFT JOIN meetingroom mr ON m.roomid = mr.roomid
+                 LEFT JOIN employee e ON m.reservationistid = e.employeeid
         WHERE m.meetingid = #{meetingId}
     </select>
 
@@ -86,12 +97,59 @@
         SELECT COUNT(*)
         FROM meeting
         WHERE roomid = #{roomId}
-        AND status != '3'  -- 正在进行的会议
+          AND status != '3'  -- 正在进行的会议
         AND (
-            (starttime BETWEEN #{startTime} AND #{endTime})
-            OR (endtime BETWEEN #{startTime} AND #{endTime})
-            OR (starttime  &lt;= #{startTime} AND endtime >= #{endTime})
-        )
+            (starttime BETWEEN #{startTime}
+          AND #{endTime})
+           OR (endtime BETWEEN #{startTime}
+          AND #{endTime})
+           OR (starttime &lt;= #{startTime}
+          AND endtime >= #{endTime})
+            )
+    </select>
+    <select id="getMyMeetings" resultType="site.hwali.meeting.model.dto.MeetingDTO">
+        SELECT m.meetingid,
+               m.meetingname,
+               mr.roomname,
+               m.starttime,
+               m.endtime,
+               m.reservationtime,
+               e.employeename AS reservername
+        FROM meetingparticipants mp
+                 INNER JOIN meeting m ON mp.meetingid = m.meetingid
+                 LEFT JOIN meetingroom mr ON m.roomid = mr.roomid
+                 LEFT JOIN employee e ON m.reservationistid = e.employeeid
+        WHERE mp.employeeid = #{id}
+          and m.status = '0'
+        ORDER BY m.starttime DESC
+            LIMIT #{offset}, #{pageSize}
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(distinct mp.meetingid)
+        from meetingparticipants mp
+                 left join meeting m on mp.meetingid = m.meetingid where mp.employeeid = #{id} and m.status = '0'
+    </select>
+    <select id="getMyBookingCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM meeting
+        WHERE reservationistid = #{id} and status != '3'
+    </select>
+    <select id="getMyBooking" resultType="site.hwali.meeting.model.dto.MeetingDTO">
+        SELECT m.meetingid,
+               m.meetingname,
+               mr.roomname,
+               m.starttime,
+               m.endtime,
+               m.reservationtime
+        FROM meeting m
+                 LEFT JOIN meetingroom mr ON m.roomid = mr.roomid
+        WHERE m.reservationistid = #{id}
+          and m.status != '3'
+        ORDER BY m.starttime DESC
+            LIMIT #{offset}, #{pageSize}
+    </select>
+    <select id="getMeetingById" resultType="site.hwali.meeting.model.dto.MeetingDTO">
+        select
     </select>
 
 </mapper>

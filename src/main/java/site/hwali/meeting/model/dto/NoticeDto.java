@@ -6,6 +6,7 @@ public class NoticeDto {
     private String roomName;
     private String startTime;
     private String endTime;
+    private String canceledReason;
 
     public int getMeetingId() {
         return meetingId;
@@ -45,5 +46,13 @@ public class NoticeDto {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public String getCanceledReason() {
+        return canceledReason;
+    }
+
+    public void setCanceledReason(String canceledReason) {
+        this.canceledReason = canceledReason;
     }
 }

@@ -153,25 +153,22 @@
                 <div class="content-nav">
                     会议预定 > 撤销会议预定
                 </div>
-                <form>
+                <form action="/cancelBooking" method="post">
                     <fieldset>
                         <legend>撤销预定</legend>
                         <table class="formtable">
                             <tr>
                                 <td>会议名称：</td>
-                                <td>市场部总结会议</td>
+                                <td>${name}</td>
                             </tr>
                             <tr>
                                 <td>撤销理由：</td>
-                                <td>15</td>
+                                <td> <textarea name="canceledreason" rows="5" placeholder="请输入撤销理由"></textarea></td>
                             </tr>
-                            <tr>
-                                <td>预计开始时间：</td>
-                                <td> <textarea id="description" rows="5">市场人员出差</textarea></td>
-                            </tr>
+                            <input type="hidden" name="id" value="${id}">
                             <tr>
                                 <td class="command" colspan="2">
-                                    <input type="button" class="clickbutton" value="确认撤销"/>
+                                    <input type="submit" class="clickbutton" value="确认撤销"/>
                                     <input type="button" class="clickbutton" value="返回" onclick="window.history.back();"/>
                                 </td>
                             </tr>
