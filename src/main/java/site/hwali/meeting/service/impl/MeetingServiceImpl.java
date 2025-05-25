@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.hwali.meeting.converter.BeanConverter;
 import site.hwali.meeting.mapper.MeetingMapper;
+import site.hwali.meeting.model.Employee;
 import site.hwali.meeting.model.Meeting;
 import site.hwali.meeting.model.dto.MeetingDTO;
 import site.hwali.meeting.model.query.MeetingSearchQuery;
@@ -52,6 +53,11 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
+    public boolean isRoomOccupied(int roomId, Date startTime, Date endTime, int excludeMeetingId) {
+        return meetingMapper.isRoomOccupiedExcludeMeeting(roomId, startTime, endTime, excludeMeetingId) > 0;
+    }
+
+    @Override
     public List<MeetingVO> getMyMeetings(int pageNum, int pageSize, int id) {
         int offset = (pageNum - 1) * pageSize;
         List<MeetingDTO> mLst = meetingMapper.getMyMeetings(offset, pageSize, id);
@@ -85,5 +91,15 @@ public class MeetingServiceImpl implements MeetingService {
     @Override
     public MeetingVO getMeetingById(int id) {
         return BeanConverter.convert(meetingMapper.getMeetingById(id),MeetingVO.class);
+    }
+
+    @Override
+    public int updateBooking(MeetingVO meetingVO) {
+        return meetingMapper.updateMeeting(meetingVO);
+    }
+
+    @Override
+    public List<Employee> getMeetingParticipants(int meetingId) {
+        return meetingMapper.getMeetingParticipants(meetingId);
     }
 }

@@ -168,7 +168,7 @@
                             <tr>
                                 <td>预计参加人数：</td>
                                 <td>
-                                    <input type="text" name="numberofparticipants" value="${(meeting.numberofparticipants)!''}"/>
+                                    <input type="number" name="numberofparticipants" value="${(meeting.numberofparticipants)!''}" min="2" required/>
                                 </td>
                             </tr>
                             <tr>

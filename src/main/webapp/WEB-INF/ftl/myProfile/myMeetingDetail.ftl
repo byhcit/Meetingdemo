@@ -3,6 +3,17 @@
     <head>
         <title>CoolMeeting会议管理系统</title>
         <link rel="stylesheet" href="/styles/common.css"/>
+        <script src="/My97DatePicker/WdatePicker.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
+        <script type="text/javascript">
+            function validateParticipants(input) {
+                var value = parseInt(input.value);
+                if (value < 2) {
+                    alert('预计参加人数不能小于2人');
+                    input.value = 2;
+                }
+            }
+        </script>
         <style type="text/css">
             #divfrom{
                 float:left;
@@ -64,32 +75,46 @@
                 selEmployees = document.getElementById("selEmployees");
                 selSelectedEmployees = document.getElementById("selSelectedEmployees");
                 
-                for(var i=0;i<data.length;i++){
-                    var dep = document.createElement("option");
-                    dep.value = data[i].departmentid;
-                    dep.text = data[i].departmentname;
-                    selDepartments.appendChild(dep);
-                }
-                
-                fillEmployees();
+                $.get("/allDeps",function (data) {
+                    for(let i =0; i <data.length; i++){
+                        var item = data[i];
+                        var dep = document.createElement("option");
+                        dep.value = item.departmentid;
+                        dep.text = item.departmentname;
+                        selDepartments.appendChild(dep);
+                    }
+                    if(selDepartments.options.length > 0) {
+                        selDepartments.selectedIndex = 0;
+                        fillEmployees();
+                    }
+                    <#if selectedMps??>
+                    var selectedMps = [<#list selectedMps as mp>${mp}<#if mp_has_next>,</#if></#list>];
+                    if (selectedMps.length > 0) {
+                        for (var i = 0; i < selDepartments.options.length; i++) {
+                            setTimeout(function() {
+                                for (var j = 0; j < selEmployees.options.length; j++) {
+                                    if (selectedMps.indexOf(parseInt(selEmployees.options[j].value)) !== -1) {
+                                        addEmployee(selEmployees.options[j]);
+                                    }
+                                }
+                            }, 100);
+                        }
+                    }
+                    </#if>
+                })
             }
             
             function fillEmployees(){
                 clearList(selEmployees);
                 var departmentid = selDepartments.options[selDepartments.selectedIndex].value;
-                var employees;
-                for(var i=0;i<data.length;i++){
-                    if (departmentid == data[i].departmentid){
-                        employees = data[i].employees;
-                        break;
+                $.get("/getEmpsByDepid?id="+departmentid,function (data) {
+                    for (let i = 0; i < data.length; i++) {
+                        var emp = document.createElement("option");
+                        emp.value = data[i].employeeid;
+                        emp.text = data[i].employeename;
+                        selEmployees.appendChild(emp);
                     }
-                }
-                for(i=0;i<employees.length;i++){
-                    var emp = document.createElement("option");
-                    emp.value = employees[i].employeeid;
-                    emp.text = employees[i].employeename;
-                    selEmployees.appendChild(emp);
-                }
+                })
             }
             
             function clearList(list){
@@ -136,6 +161,7 @@
                 var opt = document.createElement("option");
                 opt.value = optEmployee.value;
                 opt.text = optEmployee.text;
+                opt.selected = true;
                 
                 if (insertIndex == -1){
                     selSelectedEmployees.appendChild(opt);
@@ -153,78 +179,75 @@
                 <div class="content-nav">
                     会议预定 > 修改会议预定
                 </div>
-                <form>
+                <#if error??>
+                    <div class="error-message" style="color: red; margin: 10px 0;">${error}</div>
+                </#if>
+                <form action="/updateBooking" method="post">
                     <fieldset>
                         <legend>会议信息</legend>
                         <table class="formtable">
                             <tr>
                                 <td>会议名称：</td>
-                                <td>市场部总结会议</td>
+                                <td><input type="text" name="meetingname" maxlength="20" value="${meeting.meetingname}" required/></td>
+                            </tr>
+                            <tr>
+                                <td>会议室名称：</td>
+                                <td>
+                                    <select name="roomid" required>
+                                        <#list meetingRooms as room>
+                                            <option value="${room.roomid}" <#if room.roomid==meeting.roomid>selected</#if>>${room.roomname}</option>
+                                        </#list>
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
                                 <td>预计参加人数：</td>
-                                <td>15</td>
+                                <td><input type="number" name="numberofparticipants" value="${meeting.numberofparticipants}" min="2" required onchange="validateParticipants(this)" onkeyup="validateParticipants(this)"/></td>
                             </tr>
                             <tr>
-                                <td>预计开始时间：</td>
-                                <td>2013-10-21 14:50</td>
+                                <td>开始时间：</td>
+                                <td>
+                                    <input type="text" class="Wdate" name="starttime" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})" autocomplete="off" value="${meeting.starttime?string('yyyy-MM-dd HH:mm:ss')}" required/>
+                                </td>
                             </tr>
                             <tr>
-                                <td>预计结束时间：</td>
-                                <td>2013-10-21 18:50
+                                <td>结束时间：</td>
+                                <td>
+                                    <input type="text" class="Wdate" name="endtime" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})" autocomplete="off" value="${meeting.endtime?string('yyyy-MM-dd HH:mm:ss')}" required/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>会议说明：</td>
-                                <td>
-                                    <textarea id="description" rows="5" readonly>本会议将邀请专家参加。</textarea>
-                                </td>
+                                <td><textarea name="description" rows="5">${meeting.description}</textarea></td>
                             </tr>
                             <tr>
                                 <td>参会人员：</td>
                                 <td>
-                                    <table class="listtable">
-                                        <tr class="listheader">
-                                            <th>姓名</th>
-                                            <th>联系电话</th>
-                                            <td>电子邮件</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jerry</td>
-                                            <td>13800138000</td>
-                                            <td>jerry@chinasofti.com</td>
-                                        </tr>
-                                    </table>
+                                    <div id="divfrom">
+                                        <select id="selDepartments" onchange="fillEmployees()">
+                                        </select>
+                                        <select id="selEmployees" multiple="true">
+                                        </select>
+                                    </div>
+                                    <div id="divoperator">
+                                        <input type="button" class="clickbutton" value="&gt;" onclick="selectEmployees()"/>
+                                        <input type="button" class="clickbutton" value="&lt;" onclick="deSelectEmployees()"/>
+                                    </div>
+                                    <div id="divto">
+                                        <select id="selSelectedEmployees" name="mps" multiple="true">
+                                            <#if selectedEmps??>
+                                                <#list selectedEmps as emp>
+                                                    <option value="${emp.employeeid}" selected>${emp.employeename}</option>
+                                                </#list>
+                                            </#if>
+                                        </select>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="command" colspan="2">
-                                    <input type="button" class="clickbutton" value="撤销会议" onclick="window.location.href='cancelmeeting.html';"/>
+                                <td colspan="2" class="command">
+                                    <input type="hidden" name="meetingid" value="${meeting.meetingid}"/>
+                                    <input type="submit" class="clickbutton" value="保存修改"/>
                                     <input type="button" class="clickbutton" value="返回" onclick="window.history.back();"/>
                                 </td>
                             </tr>

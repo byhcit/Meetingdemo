@@ -70,7 +70,7 @@
                             </#if>
                         </td>
                         <th>取消原因</th>
-                        <td class="cell" title="${meeting.canceledReason!''}">${meeting.canceledReason!''}</td>
+                        <td class="cell" title="${meeting.canceledreason!''}">${meeting.canceledreason!''}</td>
                     </tr>
                     <tr>
                         <th>会议说明</th>

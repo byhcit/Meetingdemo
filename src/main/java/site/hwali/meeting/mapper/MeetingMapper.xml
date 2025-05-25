@@ -17,6 +17,16 @@
             (#{meetingid},#{mp})
         </foreach>
     </insert>
+    <update id="updateMeeting" parameterType="site.hwali.meeting.model.vo.MeetingVO">
+        UPDATE meeting
+        SET meetingname = #{meetingname},
+            roomid = #{roomid},
+            numberofparticipants = #{numberofparticipants},
+            starttime = #{starttime},
+            endtime = #{endtime},
+            description = #{description}
+        WHERE meetingid = #{meetingid}
+    </update>
 
     <delete id="cancelMeeting">
         UPDATE meeting
@@ -97,16 +107,27 @@
         SELECT COUNT(*)
         FROM meeting
         WHERE roomid = #{roomId}
-          AND status != '3'  -- 正在进行的会议
-        AND (
-            (starttime BETWEEN #{startTime}
-          AND #{endTime})
-           OR (endtime BETWEEN #{startTime}
-          AND #{endTime})
-           OR (starttime &lt;= #{startTime}
-          AND endtime >= #{endTime})
-            )
+          AND status != '3'
+          AND (
+              (starttime &lt;= #{startTime} AND endtime &gt; #{startTime})
+              OR (starttime &lt; #{endTime} AND endtime &gt;= #{endTime})
+              OR (starttime &gt;= #{startTime} AND endtime &lt;= #{endTime})
+          )
     </select>
+
+    <select id="isRoomOccupiedExcludeMeeting" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM meeting
+        WHERE roomid = #{roomId}
+          AND meetingid != #{excludeMeetingId}
+          AND status != '3'
+          AND (
+              (starttime &lt;= #{startTime} AND endtime &gt; #{startTime})
+              OR (starttime &lt; #{endTime} AND endtime &gt;= #{endTime})
+              OR (starttime &gt;= #{startTime} AND endtime &lt;= #{endTime})
+          )
+    </select>
+
     <select id="getMyMeetings" resultType="site.hwali.meeting.model.dto.MeetingDTO">
         SELECT m.meetingid,
                m.meetingname,
@@ -140,7 +161,8 @@
                mr.roomname,
                m.starttime,
                m.endtime,
-               m.reservationtime
+               m.reservationtime,
+               m.status
         FROM meeting m
                  LEFT JOIN meetingroom mr ON m.roomid = mr.roomid
         WHERE m.reservationistid = #{id}
@@ -148,8 +170,21 @@
         ORDER BY m.starttime DESC
             LIMIT #{offset}, #{pageSize}
     </select>
-    <select id="getMeetingById" resultType="site.hwali.meeting.model.dto.MeetingDTO">
-        select
+    <select id="getMeetingById" resultMap="MeetingResultMap">
+        SELECT m.*, mr.roomname, e.employeename as reservername
+        FROM meeting m
+        LEFT JOIN meetingroom mr ON m.roomid = mr.roomid
+        LEFT JOIN employee e ON m.reservationistid = e.employeeid
+        WHERE m.meetingid = #{id}
+    </select>
+
+    <select id="getMeetingParticipants" resultType="site.hwali.meeting.model.Employee">
+        SELECT e.*
+        FROM employee e
+        INNER JOIN meetingparticipants mp ON e.employeeid = mp.employeeid
+        WHERE mp.meetingid = #{meetingId}
+        ORDER BY e.employeeid
     </select>
 
 </mapper>
+

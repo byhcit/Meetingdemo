@@ -1,5 +1,6 @@
 package site.hwali.meeting.service;
 
+import site.hwali.meeting.model.Employee;
 import site.hwali.meeting.model.Meeting;
 import site.hwali.meeting.model.dto.MeetingDTO;
 import site.hwali.meeting.model.query.MeetingSearchQuery;
@@ -46,6 +47,17 @@ public interface MeetingService {
 
     boolean isRoomOccupied(int roomId, Date startTime, Date endTime);
 
+    /**
+     * 检查会议室是否被占用（排除指定会议）
+     *
+     * @param roomId 会议室ID
+     * @param startTime 开始时间
+     * @param endTime 结束时间
+     * @param excludeMeetingId 要排除的会议ID
+     * @return 是否被占用
+     */
+    boolean isRoomOccupied(int roomId, Date startTime, Date endTime, int excludeMeetingId);
+
     List<MeetingVO> getMyMeetings(int pageNum, int pageSize, int id);
 
     int getMyMeetingsCount(int id);
@@ -57,4 +69,14 @@ public interface MeetingService {
     int updateMeeting(int id,String canceledreason);
 
     MeetingVO getMeetingById(int id);
+
+    int updateBooking(MeetingVO meetingVO);
+
+    /**
+     * 获取会议参会人员
+     *
+     * @param meetingId 会议ID
+     * @return 参会人员列表
+     */
+    List<Employee> getMeetingParticipants(int meetingId);
 }

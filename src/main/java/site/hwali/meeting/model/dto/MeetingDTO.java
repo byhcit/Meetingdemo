@@ -23,11 +23,11 @@ public class MeetingDTO extends Meeting {
         this.reservername = reservername;
     }
 
-    public String getCanceledReason() {
+    public String getCanceledreason() {
         return canceledreason;
     }
 
-    public void setCanceledReason(String canceledReason) {
-        this.canceledreason = canceledReason;
+    public void setCanceledreason(String canceledreason) {
+        this.canceledreason = canceledreason;
     }
 }
