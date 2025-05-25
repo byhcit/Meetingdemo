@@ -5,27 +5,16 @@
         <link rel="stylesheet" href="/styles/common.css"/>
         <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
         <style>
-            .listtable {
-                margin-top: 10px;
-                width: 100%;
-                border-collapse: collapse;
-                table-layout: fixed;
+            .listtable tbody {
+                display: block;
+                max-height: 250px;
+                overflow-y: auto;
+                overflow-x: hidden;
             }
-            /*.listtable caption {*/
-            /*    font-weight: bold;*/
-            /*    text-align: left;*/
-            /*    padding: 10px 0 10px 10px;*/
-            /*}*/
             .listtable thead, .listtable tbody tr {
                 display: table;
                 width: 100%;
                 table-layout: fixed;
-            }
-            .listtable tbody {
-                display: block;
-                max-height: 250px; /* 你想要的内容区最大高度 */
-                overflow-y: auto;
-                overflow-x: hidden;
             }
             .listtable th {
                 position: sticky;
@@ -53,26 +42,30 @@
                 </form>
                 <table class="listtable">
                     <caption>所有部门:</caption>
-                    <tr class="listheader">
-                        <th>部门编号</th>
-                        <th>部门名称</th>
-                        <th>操作</th>
-                    </tr>
-                    <#if deps??>
-                        <#list deps as dep>
-                        <tr>
-                            <td>${dep.departmentid}</td>
-                            <td id="depname${dep.departmentid}">${dep.departmentname}</td>
-                            <td>
-                                <a class="clickbutton" href="#" id="edit${dep.departmentid}"
-                                   onclick="editDep(${dep.departmentid})">编辑</a>
-                                <a class="clickbutton" style="display: none" href="#" id="cancel${dep.departmentid}"
-                                   onclick="cancelDep(${dep.departmentid})">取消</a>
-                                <a class="clickbutton" href="/admin/deleteDep?id=${dep.departmentid}">删除</a>
-                            </td>
+                    <thead>
+                        <tr class="listheader">
+                            <th>部门编号</th>
+                            <th>部门名称</th>
+                            <th>操作</th>
                         </tr>
-                        </#list>
-                    </#if>
+                    </thead>
+                    <tbody>
+                        <#if deps??>
+                            <#list deps as dep>
+                                <tr>
+                                    <td>${dep.departmentid}</td>
+                                    <td id="depname${dep.departmentid}">${dep.departmentname}</td>
+                                    <td>
+                                        <a class="clickbutton" href="#" id="edit${dep.departmentid}"
+                                           onclick="editDep(${dep.departmentid})">编辑</a>
+                                        <a class="clickbutton" style="display: none" href="#" id="cancel${dep.departmentid}"
+                                           onclick="cancelDep(${dep.departmentid})">取消</a>
+                                        <a class="clickbutton" href="/admin/deleteDep?id=${dep.departmentid}">删除</a>
+                                    </td>
+                                </tr>
+                            </#list>
+                        </#if>
+                    </tbody>
                 </table>
             </div>
         </div>
