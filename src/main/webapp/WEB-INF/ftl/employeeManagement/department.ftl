@@ -4,6 +4,36 @@
         <title>CoolMeeting会议管理系统</title>
         <link rel="stylesheet" href="/styles/common.css"/>
         <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
+        <style>
+            .listtable {
+                margin-top: 10px;
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+            }
+            /*.listtable caption {*/
+            /*    font-weight: bold;*/
+            /*    text-align: left;*/
+            /*    padding: 10px 0 10px 10px;*/
+            /*}*/
+            .listtable thead, .listtable tbody tr {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+            }
+            .listtable tbody {
+                display: block;
+                max-height: 250px; /* 你想要的内容区最大高度 */
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            .listtable th {
+                position: sticky;
+                top: 0;
+                background: #fff;
+                z-index: 1;
+            }
+        </style>
     </head>
     <body>
         <#include '../layout/top.ftl'>
