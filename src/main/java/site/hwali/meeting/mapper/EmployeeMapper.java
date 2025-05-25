@@ -23,4 +23,8 @@ public interface EmployeeMapper {
     void updateStatus(@Param("employeeid") int employeeid);
 
     List<Employee> getEmpsByDepid(int id);
+
+    int updatePassword(@Param("empId") int empId,
+                       @Param("oldPassword") String oldPassword,
+                       @Param("newPassword") String newPassword);
 }

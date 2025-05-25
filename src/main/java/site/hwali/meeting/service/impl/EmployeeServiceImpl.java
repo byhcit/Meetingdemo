@@ -58,4 +58,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getEmpsByDepid(int id) {
         return employeeMapper.getEmpsByDepid(id);
     }
+
+    @Override
+    public int updatePassword(int empId, String oldPassword, String newPassword) {
+        return employeeMapper.updatePassword(empId, oldPassword, newPassword);
+    }
 }

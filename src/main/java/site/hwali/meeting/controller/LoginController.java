@@ -13,6 +13,7 @@ import site.hwali.meeting.service.DepartmentService;
 import site.hwali.meeting.service.EmployeeService;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class LoginController {
@@ -64,5 +65,41 @@ public class LoginController {
             model.addAttribute("employee",employee);
             return "/employeeManagement/register";
         }
+    }
+
+    @PostMapping("/changepwd")
+    public String changePassword(String oldPwd, String newPwd, String confirmPwd,
+                                 HttpSession session, Model model) {
+        Employee currentUser = (Employee) session.getAttribute("currentuser");
+        if (Objects.isNull(currentUser)) {
+            return "redirect:/";
+        }
+
+        if (!newPwd.equals(confirmPwd)) {
+            model.addAttribute("error", "两次输入的新密码不一致！");
+            return "changepwd";
+        }
+
+        int result = employeeService.updatePassword(currentUser.getEmployeeid(), oldPwd, newPwd);
+        if (result == 1) {
+            model.addAttribute("message", "密码修改成功！");
+            return "redirect:/notifications";
+        } else {
+            model.addAttribute("error", "原密码错误！");
+            return "changepwd";
+        }
+    }
+
+    @RequestMapping("/toChangePassword")
+    public String toChangePassword() {
+        return "changepwd";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        // 清除session
+        session.invalidate();
+        // 重定向到登录页面
+        return "redirect:/";
     }
 }

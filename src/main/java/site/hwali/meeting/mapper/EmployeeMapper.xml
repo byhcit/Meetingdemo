@@ -67,4 +67,11 @@
         from employee
         where departmentid = #{id}
     </select>
+
+    <update id="updatePassword">
+        update employee
+        set password = #{newPassword}
+        where employeeid = #{empId} and password = #{oldPassword}
+    </update>
+
 </mapper>
