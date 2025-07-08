@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
     </head>
     <body>
     <#include '../layout/top.ftl'>
@@ -15,7 +15,7 @@
                 <#if error??>
                     <div class="error">${error!''}</div>
                 </#if>
-                <form action="/admin/doAddMr" method="post">
+                <form action="/meeting/admin/doAddMr" method="post">
                     <fieldset>
                         <legend>会议室信息</legend>
                         <table class="formtable">

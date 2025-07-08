@@ -2,9 +2,9 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
         <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
-        <script src="/My97DatePicker/WdatePicker.js"></script>
+        <script src="/meeting/My97DatePicker/WdatePicker.js"></script>
         <style type="text/css">
             #divfrom{
                 float:left;
@@ -50,7 +50,7 @@
                 console.log(selDepartments);
                 console.log(selEmployees);
                 console.log(selSelectedEmployees);
-                $.get("/allDeps",function (data) {
+                $.get("/meeting/allDeps",function (data) {
                     console.log("data",data)
                     for(let i =0; i <data.length; i++){
                     var item = data[i];
@@ -80,7 +80,7 @@
             function fillEmployees(){
                 clearList(selEmployees);
                 var departmentid = selDepartments.options[selDepartments.selectedIndex].value;
-                $.get("/getEmpsByDepid?id="+departmentid,function (data) {
+                $.get("/meeting/getEmpsByDepid?id="+departmentid,function (data) {
                     for (let i = 0; i < data.length; i++) {
                         var emp = document.createElement("option");
                         emp.value = data[i].employeeid;
@@ -155,7 +155,7 @@
                 <#if error??>
                     <div class="error-message" style="color: red; margin: 10px 0;">${error}</div>
                 </#if>
-                <form action="/doAddMeeting" method="post">
+                <form action="/meeting/doAddMeeting" method="post">
                     <fieldset>
                         <legend>会议信息</legend>
                         <table class="formtable">

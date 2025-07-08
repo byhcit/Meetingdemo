@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
         <style type="text/css">
             
         </style>
@@ -16,7 +16,7 @@
                 <div class="content-nav">
                     会议预定 > 搜索会议
                 </div>
-                <form action="/searchMeetings" method="post">
+                <form action="/meeting/searchMeetings" method="post">
                     <fieldset>
                         <legend>搜索会议</legend>
                         <table class="formtable">
@@ -51,7 +51,7 @@
                             <tr>
                                 <td colspan="6" class="command">
                                     <input type="submit" value="查询" class="clickbutton"/>
-                                    <input type="button" class="clickbutton" value="重置" onclick="window.location.href='/searchMeetings'"/>
+                                    <input type="button" class="clickbutton" value="重置" onclick="window.location.href='/meeting/searchMeetings'"/>
                                 </td>
                             </tr>
                         </table>
@@ -89,14 +89,14 @@
                                 <#assign queryParams = queryParams + "&meetingtodate=" + meetingCond.meetingtodate>
                             </#if>
                             
-                            <a href="/searchMeetings?page=1${queryParams}" class="clickbutton">首页</a>
+                            <a href="/meeting/searchMeetings?page=1${queryParams}" class="clickbutton">首页</a>
                             <#if page gt 1>
-                                <a href="/searchMeetings?page=${page-1}${queryParams}" class="clickbutton">上页</a>
+                                <a href="/meeting/searchMeetings?page=${page-1}${queryParams}" class="clickbutton">上页</a>
                             </#if>
                             <#if page lt totalPages>
-                                <a href="/searchMeetings?page=${page+1}${queryParams}" class="clickbutton">下页</a>
+                                <a href="/meeting/searchMeetings?page=${page+1}${queryParams}" class="clickbutton">下页</a>
                             </#if>
-                            <a href="/searchMeetings?page=${totalPages}${queryParams}" class="clickbutton">末页</a>
+                            <a href="/meeting/searchMeetings?page=${totalPages}${queryParams}" class="clickbutton">末页</a>
                             跳到第<input type="text" id="pagenum" class="nav-number"/>页
                             <input type="button" class="clickbutton" value="跳转" onclick="goToPage()"/>
                         </div>
@@ -122,7 +122,7 @@
                                 <td>${meeting.reservationtime?string("yyyy-MM:dd HH:mm:ss")}</td>
                                 <td>${meeting.reservername}</td>
                                 <td>
-                                    <a class="clickbutton" href="/meetingdetails?id=${meeting.meetingid}">查看详情</a>
+                                    <a class="clickbutton" href="/meeting/meetingdetails?id=${meeting.meetingid}">查看详情</a>
                                 </td>
                             </tr>
                         </#list>
@@ -158,7 +158,7 @@
                 <#if meetingCond.meetingtodate??>
                     queryParams += '&meetingtodate=${meetingCond.meetingtodate}';
                 </#if>
-                window.location.href = '/searchMeetings?page=' + pageNum + queryParams;
+                window.location.href = '/meeting/searchMeetings?page=' + pageNum + queryParams;
             } else {
                 alert('请输入有效的页码！');
             }

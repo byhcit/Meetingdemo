@@ -19,16 +19,20 @@ public class PermissInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
+        String contextPath = request.getContextPath();
+
         System.out.println("requestURI = " + requestURI);
-        // 匿名可访问路径
-        String[] commonPaths = {"/","/doLogin","/register","/doReg"};
-        if (Arrays.stream(commonPaths).filter(path->path.equals(requestURI)).count()>0){
-                return true;
+        System.out.println("contextPath = " + contextPath);
+
+//        // 匿名可访问路径（考虑上下文路径）
+        String[] commonPaths = {"/", "/doLogin", "/register", "/doReg"};
+        if (Arrays.stream(commonPaths).filter(path -> requestURI.equals(contextPath + path)).count() > 0) {
+            return true;
         }
         HttpSession session = request.getSession(true);
         Employee currentuser = (Employee) session.getAttribute("currentuser");
         if (pathMatcher.match("/admin/**", requestURI)) {
-            if (!Objects.isNull(currentuser)){
+            if (!Objects.isNull(currentuser)) {
                 if (currentuser.getRole() == 2) {
                     return true;
                 } else {
@@ -36,12 +40,12 @@ public class PermissInterceptor implements HandlerInterceptor {
                     return false;
                 }
             }
-        }else{
+        } else {
             if (currentuser != null) {
                 return true;
             }
         }
-        response.sendRedirect("/");
+        response.sendRedirect("/meeting");
         return false;
 
     }

@@ -39,7 +39,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public int updateDep(int id, int name) {
+    public int updateDep(int id, String name) {
         return departmentMapper.updateDep(id, name);
     }
 }

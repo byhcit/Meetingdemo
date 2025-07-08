@@ -1,6 +1,6 @@
 <div class="page-header">
     <div class="header-banner">
-        <img src="/images/header.png" alt="CoolMeeting"/>
+        <img src="/meeting/images/header.png" alt="CoolMeeting"/>
     </div>
     <div class="header-title">
         欢迎访问Cool-Meeting会议管理系统
@@ -11,8 +11,8 @@
             <div class="user-dropdown">
                 <span class="user-name">${currentuser.employeename!''}</span>
                 <div class="dropdown-menu">
-                    <a href="/toChangePassword">修改密码</a>
-                    <a href="/logout">退出登录</a>
+                                    <a href="/meeting/toChangePassword">修改密码</a>
+                <a href="/meeting/logout">退出登录</a>
                 </div>
             </div>
         </#if>

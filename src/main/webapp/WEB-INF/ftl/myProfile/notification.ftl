@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
         <style>
             .cell {
                 max-width: 200px;
@@ -77,7 +77,7 @@
                                 <td class="cell" title="${m.roomName}">${m.roomName}</td>
                                 <td class="cell" title="${m.startTime}">${m.startTime}</td>
                                 <td class="cell" title="${m.endTime}">${m.endTime}</td>
-                                <td><a class="clickbutton" href="/meetingdetails?id=${m.meetingId}">查看详情</a></td>
+                                <td><a class="clickbutton" href="/meeting/meetingdetails?id=${m.meetingId}">查看详情</a></td>
                             </tr>
                         </#list>
                     <#else>
@@ -119,7 +119,7 @@
                                     <td class="cell" title="${m.startTime}">${m.startTime}</td>
                                     <td class="cell" title="${m.endTime}">${m.endTime}</td>
                                     <td class="cell" title="${m.canceledReason!''}">${m.canceledReason!''}</td>
-                                    <td><a class="clickbutton" href="/meetingdetails?id=${m.meetingId}">查看详情</a></td>
+                                    <td><a class="clickbutton" href="/meeting/meetingdetails?id=${m.meetingId}">查看详情</a></td>
                                 </tr>
                             </#list>
                         <#else>

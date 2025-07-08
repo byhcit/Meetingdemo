@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
-        <link rel="stylesheet" href="/styles/pagination.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/pagination.css"/>
         <style>
             .table-container {
                 width: 100%;
@@ -62,10 +62,10 @@
                                         </#if>
                                     </td>
                                     <td>
-                                        <a class="clickbutton" href="/meetingdetails?id=${b.meetingid}">查看</a>
+                                        <a class="clickbutton" href="/meeting/meetingdetails?id=${b.meetingid}">查看</a>
                                         <#if b.status == "0">
-                                            <a class="clickbutton" href="/myMeetingDetail?id=${b.meetingid}">修改</a>
-                                            <a class="clickbutton" href="/cancelMeeting?id=${b.meetingid}&name=${b.meetingname}">取消</a>
+                                                                        <a class="clickbutton" href="/meeting/myMeetingDetail?id=${b.meetingid}">修改</a>
+                            <a class="clickbutton" href="/meeting/cancelMeeting?id=${b.meetingid}&name=${b.meetingname}">取消</a>
                                         </#if>
                                     </td>
                                 </tr>
@@ -79,7 +79,7 @@
                 </div>
                 <#if total?? && total gt 0>
                     <#include '../common/pagination.ftl'>
-                    <@pagination pageNum=pageNum!1 pageSize=pageSize!1 total=total totalPages=totalPages!1 url="/myBooking"/>
+                    <@pagination pageNum=pageNum!1 pageSize=pageSize!1 total=total totalPages=totalPages!1 url="/meeting/myBooking"/>
                 </#if>
             </div>
         </div>

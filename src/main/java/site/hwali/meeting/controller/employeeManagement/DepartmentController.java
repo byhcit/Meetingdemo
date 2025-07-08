@@ -52,7 +52,7 @@ public class DepartmentController {
 
     @RequestMapping("updateDep")
     @ResponseBody
-    public String updateDep(int id, int name) {
+    public String updateDep(int id, String name) {
         int result = departmentService.updateDep(id, name);
         return result == 1 ? "success" : "error";
     }

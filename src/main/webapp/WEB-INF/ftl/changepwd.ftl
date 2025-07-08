@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
         <script type="text/javascript">
             function validateForm(){
                 var oldPwd = document.getElementById("oldPwd").value;
@@ -37,7 +37,7 @@
                 <div class="content-nav">
                     修改密码
                 </div>
-                <form action="/changepwd" method="post" onsubmit="return validateForm()">
+                <form action="/meeting/changepwd" method="post" onsubmit="return validateForm()">
                     <fieldset>
                         <legend>修改密码信息</legend>
                         <table class="formtable" style="width:50%">

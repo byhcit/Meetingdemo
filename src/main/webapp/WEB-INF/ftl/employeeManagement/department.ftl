@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
         <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
         <style>
             .listtable tbody {
@@ -32,7 +32,7 @@
                 <div class="content-nav">
                     人员管理 > 部门管理
                 </div>
-                <form action="/admin/addDept">
+                <form action="/meeting/admin/addDept">
                     <fieldset>
                         <legend>添加部门</legend>
                         部门名称:
@@ -60,7 +60,7 @@
                                            onclick="editDep(${dep.departmentid})">编辑</a>
                                         <a class="clickbutton" style="display: none" href="#" id="cancel${dep.departmentid}"
                                            onclick="cancelDep(${dep.departmentid})">取消</a>
-                                        <a class="clickbutton" href="/admin/deleteDep?id=${dep.departmentid}">删除</a>
+                                        <a class="clickbutton" href="/meeting/admin/deleteDep?id=${dep.departmentid}">删除</a>
                                     </td>
                                 </tr>
                             </#list>
@@ -90,7 +90,7 @@
                 window.children = children;
                 console.log("children===>", children);
                 var val = children.val();
-                $.post('/admin/updateDep',{id:depid,name:val},(msg) => {
+                $.post('/meeting/admin/updateDep',{id:depid,name:val},(msg) => {
                     if ('success' === msg){
                         cancelBtn.css('display', 'none');
                         editBtn.html('编辑');

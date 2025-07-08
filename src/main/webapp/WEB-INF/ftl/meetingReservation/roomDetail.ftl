@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
     </head>
     <body>
         <#include '../layout/top.ftl'>
@@ -12,14 +12,14 @@
                 <div class="content-nav">
                     会议预定 > 修改会议室信息
                 </div>
-                <form action="/updateRoom" method="post">
+                <form action="/meeting/updateRoom" method="post">
                     <fieldset>
                         <legend>会议室信息</legend>
                         <table class="formtable">
                             <tr>
                                 <td>门牌号:</td>
                                 <td>
-                                    <input name="roomnumber" type="text" value="${mr.roomnum}" maxlength="10"/>
+                                    <input name="roomnum" type="text" value="${mr.roomnum}" maxlength="10"/>
                                 </td>
                             </tr>
                             <tr>

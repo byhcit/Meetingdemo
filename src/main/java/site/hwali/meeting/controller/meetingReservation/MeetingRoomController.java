@@ -42,7 +42,7 @@ public class MeetingRoomController {
     @RequestMapping("/updateRoom")
     public String updateRoom(MeetingRoom meetingRoom) {
         int result = meetingRoomService.updateRoom(meetingRoom);
-        return result == 1 ? "/meetingReservation/meetingRoom" : "/meetingReservation/roomDetail";
+        return result == 1 ? "redirect:/meetingRoom" : "redirect:/roomDetail?id=" + meetingRoom.getRoomid();
     }
 
     @RequestMapping("/admin/addMeetingRoom")

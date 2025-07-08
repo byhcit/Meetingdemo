@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
-        <link rel="stylesheet" href="/styles/pagination.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/pagination.css"/>
     </head>
     <body>
     <#include '../layout/top.ftl'>
@@ -30,15 +30,15 @@
                             <td>${emp.phone}</td>
                             <td>${emp.email}</td>
                             <td>
-                                <a type="button" class="clickbutton" href="/admin/updateStatus?employeeid=${emp.employeeid}&status=1">通过</a>
-                                <a type="button" class="clickbutton" href="/admin/updateStatus?employeeid=${emp.employeeid}&status=2">不通过</a>
+                                <a type="button" class="clickbutton" href="/meeting/admin/updateStatus?employeeid=${emp.employeeid}&status=1">通过</a>
+                                <a type="button" class="clickbutton" href="/meeting/admin/updateStatus?employeeid=${emp.employeeid}&status=2">不通过</a>
                             </td>
                         </tr>
                     </#list>
                 </#if>
             </table>
             <#include '../common/pagination.ftl'>
-            <@pagination pageNum=pageNum pageSize=pageSize total=total totalPages=totalPages url="/admin/approveAccount"/>
+            <@pagination pageNum=pageNum pageSize=pageSize total=total totalPages=totalPages url="/meeting/admin/approveAccount"/>
         </div>
     </div>
     <#include '../layout/footer.ftl'>

@@ -15,6 +15,6 @@ public interface DepartmentMapper {
 
     int deleteDep(int id);
 
-    int updateDep(int id, int name);
+    int updateDep(int id, String name);
 
 }

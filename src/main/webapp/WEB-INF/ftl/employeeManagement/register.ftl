@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
         <style type="text/css">
 
         </style>
@@ -15,7 +15,7 @@
                 <div class="content-nav">
                     人员管理 > 员工注册
                 </div>
-                <form action="/doReg" id="RegForm">
+                <form action="/meeting/doReg" id="RegForm">
                     <fieldset>
                         <legend>员工信息</legend>
                         <table class="formtable" style="width:50%">

@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
     </head>
     <body>
         <#include '../layout/top.ftl'>
@@ -12,7 +12,7 @@
                 <div class="content-nav">
                     人员管理 > 搜索员工
                 </div>
-                <form action="/admin/searchEmps" method="post">
+                <form action="/meeting/admin/searchEmps" method="post">
                     <fieldset>
                         <legend>员工查询</legend>
                         <table class="formtable">
@@ -35,7 +35,7 @@
                             <tr>
                                 <td colspan="6" class="command">
                                     <input type="submit" value="查询" class="clickbutton"/>
-                                    <input type="button" class="clickbutton" value="重置" onclick="window.location.href='/admin/searchEmps'"/>
+                                    <input type="button" class="clickbutton" value="重置" onclick="window.location.href='/meeting/admin/searchEmps'"/>
                                 </td>
                             </tr>
                         </table>
@@ -61,14 +61,14 @@
                                 <#assign queryParams = queryParams + "&status=" + empCond.status>
                             </#if>
                             
-                            <a href="/admin/searchEmps?page=1${queryParams}" class="clickbutton">首页</a>
+                            <a href="/meeting/admin/searchEmps?page=1${queryParams}" class="clickbutton">首页</a>
                             <#if page gt 1>
-                                <a href="/admin/searchEmps?page=${page-1}${queryParams}" class="clickbutton">上页</a>
+                                <a href="/meeting/admin/searchEmps?page=${page-1}${queryParams}" class="clickbutton">上页</a>
                             </#if>
                             <#if page lt totalPages>
-                                <a href="/admin/searchEmps?page=${page+1}${queryParams}" class="clickbutton">下页</a>
+                                <a href="/meeting/admin/searchEmps?page=${page+1}${queryParams}" class="clickbutton">下页</a>
                             </#if>
-                            <a href="/admin/searchEmps?page=${totalPages}${queryParams}" class="clickbutton">末页</a>
+                            <a href="/meeting/admin/searchEmps?page=${totalPages}${queryParams}" class="clickbutton">末页</a>
                             跳到第<input type="text" id="pagenum" class="nav-number"/>页
                             <input type="button" class="clickbutton" value="跳转" onclick="goToPage()"/>
                         </div>
@@ -90,10 +90,10 @@
                                 <td>${emp.phone}</td>
                                 <td>${emp.email}</td>
                                 <#if emp.status != '2'>
-                                    <td><a class="clickbutton" href="/admin/disableEmp?id=${emp.employeeid}">关闭账号</a></td>
+                                    <td><a class="clickbutton" href="/meeting/admin/disableEmp?id=${emp.employeeid}">关闭账号</a></td>
                                 </#if>
                                 <#if emp.status == '2'>
-                                    <td><a class="clickbutton" href="/admin/unlockEmp?id=${emp.employeeid}">解开账号</a></td>
+                                    <td><a class="clickbutton" href="/meeting/admin/unlockEmp?id=${emp.employeeid}">解开账号</a></td>
                                 </#if>
                             </tr>
                         </#list>
@@ -117,7 +117,7 @@
                 <#if empCond.status??>
                     queryParams += '&status=${empCond.status}';
                 </#if>
-                window.location.href = '/admin/searchEmps?page=' + pageNum + queryParams;
+                window.location.href = '/meeting/admin/searchEmps?page=' + pageNum + queryParams;
             } else {
                 alert('请输入有效的页码！');
             }

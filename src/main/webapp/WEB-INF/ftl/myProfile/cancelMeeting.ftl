@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>CoolMeeting会议管理系统</title>
-        <link rel="stylesheet" href="/styles/common.css"/>
+        <link rel="stylesheet" href="/meeting/styles/common.css"/>
         <style type="text/css">
             #divfrom{
                 float:left;
@@ -153,7 +153,7 @@
                 <div class="content-nav">
                     会议预定 > 撤销会议预定
                 </div>
-                <form action="/cancelBooking" method="post">
+                <form action="/meeting/cancelBooking" method="post">
                     <fieldset>
                         <legend>撤销预定</legend>
                         <table class="formtable">
