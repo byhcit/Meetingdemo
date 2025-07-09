@@ -47,8 +47,7 @@ MeetingDemo 是一个基于 Spring MVC + MyBatis + FreeMarker 的会议室管理
 
 #### 访问地址
 
-- **直接访问**: http://hwali.site:8080/meetingdemo/
-- **子域名访问**: http://meetingdemo.hwali.site/
+- **直接访问**: http://hwali.site:8080/meeting/
 
 #### 默认账户
 
