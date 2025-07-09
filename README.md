@@ -35,7 +35,6 @@ MeetingDemo 是一个基于 Spring MVC + MyBatis + FreeMarker 的会议室管理
 ### 通知系统
 - 系统通知
 - 会议提醒
-- 消息推送
 
 ## 快速开始
 
